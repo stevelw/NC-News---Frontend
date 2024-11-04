@@ -1,12 +1,15 @@
 import ArticleCard from "./ArticleCard";
 
 export default function ArticleList({ articles }) {
+  const style = {
+    gridArea: "grid1",
+  };
   const childStyle = {
     maxWidth: "40%",
     maxHeight: "100px",
   };
   return (
-    <>
+    <div style={style}>
       {articles.map((article) => {
         return (
           <ArticleCard key={article}>
@@ -22,6 +25,6 @@ export default function ArticleList({ articles }) {
           </ArticleCard>
         );
       })}
-    </>
+    </div>
   );
 }
