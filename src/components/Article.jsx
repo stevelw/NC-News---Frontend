@@ -59,40 +59,42 @@ export default function Article() {
   }, []);
 
   return (
-    <div className="article-grid">
-      <p style={backButtonStyle}>Back button</p>
-      <p style={homeButtonStyle}>Home button</p>
-      {isError ? (
-        <ErrorComponent
-          message={
-            "Error loading article. Check your network connection and try again"
-          }
-        />
-      ) : (
-        <>
-          <h2 style={headlineStyle}>
-            {isLoading ? "Loading..." : article.title}
-          </h2>
-          <p style={topicStyle}>{article.topic}</p>
-          <p style={timestampStyle}>{article.timestamp}</p>
-          <img
-            style={imageStyle}
-            src={
-              isLoading
-                ? "https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"
-                : article.article_img_url
+    <>
+      <div className="hidden">
+        <HeaderElement />
+      </div>
+      <div className="article-grid">
+        <p style={backButtonStyle}>Back button</p>
+        <p style={homeButtonStyle}>Home button</p>
+        {isError ? (
+          <ErrorComponent
+            message={
+              "Error loading article. Check your network connection and try again"
             }
-            alt=""
           />
-          <div style={bodyStyle}>
-            <p>{article.body}</p>
-          </div>
-          <p style={authorStyle}>{article.author}</p>
-          {/* TODO: Show username */}
-          <Vote></Vote>
-          <CommentList />
-        </>
-      )}
-    </div>
+        ) : (
+          <>
+            <h2 style={headlineStyle}>
+              {isLoading ? "Loading..." : article.title}
+            </h2>
+            <p style={topicStyle}>{article.topic}</p>
+            <p style={timestampStyle}>{article.timestamp}</p>
+            <img
+              style={imageStyle}
+              src={
+                isLoading
+                  ? "https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"
+                  : article.article_img_url
+              }
+              alt=""
+            />
+            <div style={bodyStyle}>
+              <p>{article.body}</p>
+            </div>
+            <p style={authorStyle}>{article.author}</p>
+          </>
+        )}
+      </div>
+    </>
   );
 }
