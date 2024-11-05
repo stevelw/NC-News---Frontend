@@ -2,8 +2,15 @@ import CommentList from "./CommentList";
 import Header from "./Header";
 import Vote from "./Vote";
 export default function Article() {
-  const backButtonStyle = { gridArea: "top-left-button" };
-  const homeButtonStyle = { gridArea: "top-right-button", textAlign: "right" };
+  const backButtonStyle = {
+    gridArea: "top-left-button",
+    border: "red solid 1px",
+  };
+  const homeButtonStyle = {
+    gridArea: "top-right-button",
+    textAlign: "right",
+    border: "red solid 1px",
+  };
   const headlineStyle = { gridArea: "headline" };
   const topicStyle = { gridArea: "topic", textAlign: "right" };
   const timestampStyle = { gridArea: "timestamp", textAlign: "right" };
