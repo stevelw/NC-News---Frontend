@@ -1,7 +1,7 @@
 import CommentList from "./CommentList";
 import Header from "./Header";
 import Vote from "./Vote";
-export default function Artical() {
+export default function Article() {
   const backButtonStyle = { gridArea: "top-left-button" };
   const homeButtonStyle = { gridArea: "top-right-button", textAlign: "right" };
   const headlineStyle = { gridArea: "headline" };
@@ -12,7 +12,7 @@ export default function Artical() {
   const authorStyle = { gridArea: "author", textAlign: "right" };
 
   return (
-    <div className="artical-grid">
+    <div className="article-grid">
       <p style={backButtonStyle}>Back button</p>
       <p style={homeButtonStyle}>Home button</p>
       <h2 style={headlineStyle}>Headline</h2>
