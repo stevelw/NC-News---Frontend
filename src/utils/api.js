@@ -15,3 +15,15 @@ export function getLatestArticles() {
       throw err;
     });
 }
+
+export function getTopics() {
+  return network
+    .get("/topics")
+    .then((response) => {
+      return response.data.topics;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}
