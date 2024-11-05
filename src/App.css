@@ -1,0 +1,28 @@
+* {
+  color: #223f55;
+  background: #f8f9f9;
+  box-sizing: border-box;
+}
+
+h1 {
+  background: transparent;
+}
+
+.columns-2-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "grid1"
+    "grid2"
+    "grid3";
+}
+
+@media (min-width: 850px) {
+  .columns-2-1 {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+    'grid1 grid3'
+    'grid2 .';
+  }
+}
