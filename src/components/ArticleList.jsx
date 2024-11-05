@@ -25,7 +25,7 @@ export default function ArticleList({ articles }) {
             <img
               style={childStyle}
               src={article_img_url}
-              alt="A placeholder image"
+              alt=""
             />
           </ArticleCard>
         );
