@@ -17,7 +17,6 @@ export default function LatestNews() {
     setIsError(false);
     getLatestArticles()
       .then((articles) => {
-        console.log(articles);
         setArticles(articles);
         setIsLoading(false);
       })
