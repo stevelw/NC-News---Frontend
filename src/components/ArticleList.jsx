@@ -7,8 +7,7 @@ export default function ArticleList({ articles }) {
     gridArea: "grid1",
   };
   const childStyle = {
-    maxWidth: "40%",
-    maxHeight: "120px",
+    maxWidth: "45%",
   };
 
   const {topics, setTopics} = useContext(TopicsContext)
