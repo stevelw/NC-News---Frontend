@@ -1,7 +1,12 @@
 export default function CommentList() {
-  const style = {
-    gridArea: "comment-list",
-    border: "red solid 1px",
-  };
-  return <p style={style}>CommentList</p>;
+  return (
+    <p
+      style={{
+        gridArea: "comment-list",
+        border: "red solid 1px",
+      }}
+    >
+      CommentList
+    </p>
+  );
 }

@@ -8,31 +8,6 @@ import { TopicsContext } from "../contexts/Topics";
 import ErrorComponent from "./ErrorComponent";
 
 export default function Article() {
-  const backButtonStyle = {
-    gridArea: "top-left-button",
-    border: "red solid 1px",
-  };
-  const homeButtonStyle = {
-    gridArea: "top-right-button",
-    textAlign: "right",
-    border: "red solid 1px",
-  };
-  const headlineStyle = { gridArea: "headline" };
-  const topicStyle = {
-    gridArea: "topic",
-    textAlign: "right",
-  };
-  const timestampStyle = {
-    gridArea: "timestamp",
-    textAlign: "right",
-  };
-  const imageStyle = { gridArea: "image" };
-  const bodyStyle = { gridArea: "body" };
-  const authorStyle = {
-    gridArea: "author",
-    textAlign: "right",
-  };
-
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const { topics, setTopics } = useContext(TopicsContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,8 +39,22 @@ export default function Article() {
         <HeaderElement />
       </div>
       <div className="article-grid">
-        <p style={backButtonStyle}>Back button</p>
-        <p className="hiddenOnLargeScreen" style={homeButtonStyle}>
+        <p
+          style={{
+            gridArea: "top-left-button",
+            border: "red solid 1px",
+          }}
+        >
+          Back button
+        </p>
+        <p
+          className="hiddenOnLargeScreen"
+          style={{
+            gridArea: "top-right-button",
+            textAlign: "right",
+            border: "red solid 1px",
+          }}
+        >
           Home button
         </p>
         {isError ? (
@@ -76,13 +65,27 @@ export default function Article() {
           />
         ) : (
           <>
-            <h2 style={headlineStyle}>
+            <h2 style={{ gridArea: "headline" }}>
               {isLoading ? "Loading..." : article.title}
             </h2>
-            <p style={topicStyle}>{article.topic}</p>
-            <p style={timestampStyle}>{article.timestamp}</p>
+            <p
+              style={{
+                gridArea: "topic",
+                textAlign: "right",
+              }}
+            >
+              {article.topic}
+            </p>
+            <p
+              style={{
+                gridArea: "timestamp",
+                textAlign: "right",
+              }}
+            >
+              {article.timestamp}
+            </p>
             <img
-              style={imageStyle}
+              style={{ gridArea: "image" }}
               src={
                 isLoading
                   ? "https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"
@@ -90,10 +93,17 @@ export default function Article() {
               }
               alt=""
             />
-            <div style={bodyStyle}>
+            <div style={{ gridArea: "body" }}>
               <p>{article.body}</p>
             </div>
-            <p style={authorStyle}>{article.author}</p>
+            <p
+              style={{
+                gridArea: "author",
+                textAlign: "right",
+              }}
+            >
+              {article.author}
+            </p>
           </>
         )}
       </div>

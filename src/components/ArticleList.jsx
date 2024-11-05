@@ -4,31 +4,30 @@ import ArticleCard from "./ArticleCard";
 import { Link } from "react-router-dom";
 
 export default function ArticleList({ articles }) {
-  const style = {
-    gridArea: "grid1",
-  };
   const childStyle = {
     maxWidth: "45%",
   };
 
-  const {topics, setTopics} = useContext(TopicsContext)
+  const { topics, setTopics } = useContext(TopicsContext);
 
   return (
-    <div style={style}>
+    <div
+      style={{
+        gridArea: "grid1",
+      }}
+    >
       {articles.map(({ article_id, title, topic, article_img_url }) => {
-        const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi,'-')
-        const articleUrl = '/articles/' + urlFriendlyTitle + '-' + article_id
+        const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
+        const articleUrl = "/articles/" + urlFriendlyTitle + "-" + article_id;
         return (
           <ArticleCard key={article_id}>
             <div style={childStyle}>
-              <Link to ={articleUrl}><h3>{title}</h3></Link>
+              <Link to={articleUrl}>
+                <h3>{title}</h3>
+              </Link>
               <p>{topics[topic] ?? topic}</p>
             </div>
-            <img
-              style={childStyle}
-              src={article_img_url}
-              alt=""
-            />
+            <img style={childStyle} src={article_img_url} alt="" />
           </ArticleCard>
         );
       })}
