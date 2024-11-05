@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TopicsContext } from "../contexts/Topics";
 import ArticleCard from "./ArticleCard";
+import { Link } from "react-router-dom";
 
 export default function ArticleList({ articles }) {
   const style = {
@@ -15,10 +16,12 @@ export default function ArticleList({ articles }) {
   return (
     <div style={style}>
       {articles.map(({ article_id, title, topic, article_img_url }) => {
+        const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi,'-')
+        const articleUrl = '/articles/' + urlFriendlyTitle + '-' + article_id
         return (
           <ArticleCard key={article_id}>
             <div style={childStyle}>
-              <h3>{title}</h3>
+              <Link to ={articleUrl}><h3>{title}</h3></Link>
               <p>{topics[topic] ?? topic}</p>
             </div>
             <img

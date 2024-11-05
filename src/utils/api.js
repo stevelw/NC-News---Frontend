@@ -27,3 +27,15 @@ export function getTopics() {
       throw err;
     });
 }
+
+export function getArticle(articleId) {
+  return network
+    .get(`/articles/${articleId}`)
+    .then((response) => {
+      return response.data.article;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}
