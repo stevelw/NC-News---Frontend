@@ -9,17 +9,24 @@ import { getLatestArticles } from "../utils/api";
 
 export default function LatestNews() {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
     getLatestArticles()
-    .then(articles => {
-      console.log(articles)
-      setArticles(articles)
-    })
-    .catch(err => {
-      setArticles([])
-    })
-  }, [])
+      .then((articles) => {
+        console.log(articles);
+        setArticles(articles);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(articles);
+        setArticles([]);
+        setIsError(true);
+      });
+  }, []);
 
   return (
     <>
@@ -28,7 +35,17 @@ export default function LatestNews() {
         <h2>Latest News</h2>
       </Center>
       <Columns_2_1>
-        <ArticleList articles={articles} />
+        {isError ? (
+          <div>
+            <p>Error loading articles.</p>
+            <p>Check your network connection and try again</p>
+          </div>
+        ) : null}
+        {isLoading && !isError ? (
+          <p>Loading...</p>
+        ) : (
+          <ArticleList articles={articles} />
+        )}
         <LoadButton />
         <TopicList />
       </Columns_2_1>
