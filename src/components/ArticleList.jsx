@@ -1,14 +1,10 @@
-import { useContext } from "react";
-import { TopicsContext } from "../contexts/Topics";
 import ArticleCard from "./ArticleCard";
 import { Link } from "react-router-dom";
 
-export default function ArticleList({ articles }) {
+export default function ArticleList({ articles, topics }) {
   const childStyle = {
     maxWidth: "45%",
   };
-
-  const { topics, setTopics } = useContext(TopicsContext);
 
   return (
     <div

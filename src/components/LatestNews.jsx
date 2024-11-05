@@ -8,7 +8,7 @@ import LoadButton from "./LoadButton";
 import { getLatestArticles } from "../utils/api";
 import ErrorComponent from "./ErrorComponent";
 
-export default function LatestNews() {
+export default function LatestNews({ topics }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -41,7 +41,7 @@ export default function LatestNews() {
         {isLoading && !isError ? (
           <p>Loading...</p>
         ) : (
-          <ArticleList articles={articles} />
+          <ArticleList articles={articles} topics={topics} />
         )}
         <LoadButton />
         <TopicList />

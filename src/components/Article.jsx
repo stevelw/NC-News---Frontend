@@ -3,13 +3,11 @@ import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
 import Vote from "./Vote";
 import { getArticle } from "../utils/api";
-import { useContext, useEffect, useState } from "react";
-import { TopicsContext } from "../contexts/Topics";
+import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 
-export default function Article() {
+export default function Article({ topics }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
-  const { topics, setTopics } = useContext(TopicsContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
