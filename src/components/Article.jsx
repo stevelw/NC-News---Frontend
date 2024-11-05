@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import CommentList from "./CommentList";
-import Header from "./Header";
+import HeaderElement from "./HeaderElement";
 import Vote from "./Vote";
 import { getArticle } from "../utils/api";
 import { useContext, useEffect, useState } from "react";

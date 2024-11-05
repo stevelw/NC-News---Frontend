@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Center from "../styles/Center";
 import ArticleList from "./ArticleList";
-import Header from "./Header";
+import HeaderElement from "./HeaderElement";
 import TopicList from "./TopicList";
 import Columns_2_1 from "../styles/Columns_2_1";
 import LoadButton from "./LoadButton";
@@ -30,7 +30,7 @@ export default function LatestNews() {
 
   return (
     <>
-      <Header />
+      <HeaderElement />
       <Center>
         <h2>Latest News</h2>
       </Center>
