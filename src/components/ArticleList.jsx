@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { TopicsContext } from "../contexts/Topics";
 import ArticleCard from "./ArticleCard";
 
 export default function ArticleList({ articles }) {
@@ -6,8 +8,11 @@ export default function ArticleList({ articles }) {
   };
   const childStyle = {
     maxWidth: "40%",
-    maxHeight: "100px",
+    maxHeight: "120px",
   };
+
+  const {topics, setTopics} = useContext(TopicsContext)
+
   return (
     <div style={style}>
       {articles.map(({ article_id, title, topic, article_img_url }) => {
@@ -15,7 +20,7 @@ export default function ArticleList({ articles }) {
           <ArticleCard key={article_id}>
             <div style={childStyle}>
               <h3>{title}</h3>
-              <p>{topic}</p>
+              <p>{topics[topic] ?? topic}</p>
             </div>
             <img
               style={childStyle}
