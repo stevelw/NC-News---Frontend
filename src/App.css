@@ -37,12 +37,18 @@ h1 {
 
 .hiddenOnSmallScreen {
   display: none;
-  /* Display hidden is bad */
+}
+
+.hiddenOnLargeScreen {
+  display: block;
 }
 
 @media (min-width: 850px) {
   .hiddenOnSmallScreen {
     display: block;
+  }
+  .hiddenOnLargeScreen {
+    display: none;
   }
   .columns-2-1 {
     grid-template-columns: 2fr 1fr;

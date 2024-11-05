@@ -65,7 +65,9 @@ export default function Article() {
       </div>
       <div className="article-grid">
         <p style={backButtonStyle}>Back button</p>
-        <p style={homeButtonStyle}>Home button</p>
+        <p className="hiddenOnLargeScreen" style={homeButtonStyle}>
+          Home button
+        </p>
         {isError ? (
           <ErrorComponent
             message={
