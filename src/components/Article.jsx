@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import Header from "./Header";
 import Vote from "./Vote";
-import { getArtical } from "../utils/api";
-import { useContext } from "react";
+import { getArticle } from "../utils/api";
+import { useContext, useEffect, useState } from "react";
 import { TopicsContext } from "../contexts/Topics";
 
 export default function Article() {
@@ -34,23 +34,36 @@ export default function Article() {
 
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const { topics, setTopics } = useContext(TopicsContext);
+  const [article, setArticle] = useState({});
 
-  const { author, title, body, topic, created_at, article_img_url } =
-    getArtical();
-  const timestamp = new Date(created_at).toDateString();
+  useEffect(() => {
+    getArticle(articleId).then(
+      ({ author, title, body, topic, created_at, article_img_url }) => {
+        const timestamp = new Date(created_at).toDateString();
+        setArticle({
+          author,
+          title,
+          body,
+          topic: topics[topic] ?? topic,
+          timestamp,
+          article_img_url,
+        });
+      }
+    );
+  }, []);
 
   return (
     <div className="article-grid">
       <p style={backButtonStyle}>Back button</p>
       <p style={homeButtonStyle}>Home button</p>
-      <h2 style={headlineStyle}>{title}</h2>
-      <p style={topicStyle}>{topics[topic] ?? topic}</p>
-      <p style={timestampStyle}>{timestamp}</p>
-      <img style={imageStyle} src={article_img_url} alt="" />
+      <h2 style={headlineStyle}>{article.title}</h2>
+      <p style={topicStyle}>{article.topic}</p>
+      <p style={timestampStyle}>{article.timestamp}</p>
+      <img style={imageStyle} src={article.article_img_url} alt="" />
       <div style={bodyStyle}>
-        <p>{body}</p>
+        <p>{article.body}</p>
       </div>
-      <p style={authorStyle}>{author}</p>
+      <p style={authorStyle}>{article.author}</p>
       <Vote></Vote>
       <CommentList />
     </div>
