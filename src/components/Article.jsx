@@ -84,6 +84,7 @@ export default function Article({ topics }) {
             >
               {article.author}
             </p>
+            <CommentList articleId={article.articleId} />
           </>
         )}
       </div>
