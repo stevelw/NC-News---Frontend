@@ -33,7 +33,7 @@ export default function Article({ topics }) {
 
   return (
     <>
-      <div className="hidden">
+      <div className="hiddenOnSmallScreen">
         <HeaderElement />
       </div>
       <div className="article-grid">
