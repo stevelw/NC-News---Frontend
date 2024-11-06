@@ -40,6 +40,17 @@ export function getArticle(articleId) {
     });
 }
 
+export function incrementVotes(articleId) {
+  return getComments(articleId)
+    .then(() => {
+      // Mock
+      return Promise.reject();
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+
 export function getComments(articleId) {
   return network
     .get(`/articles/${articleId}/comments`)

@@ -29,15 +29,15 @@ img {
   grid-template-rows: auto;
   gap: 1em;
   grid-template-areas:
-    "top-left-button  .               top-right-button"
-    "headline         headline        headline"
-    ".                .               topic"
-    ".                .               timestamp"
-    "image            image           image"
-    "body             body            body"
-    ".                .               author"
-    "vote-widget      comment-button  comment-button"
-    "comment-list     comment-list    comment-list";
+    "top-left-button  .             top-right-button"
+    "headline         headline      headline"
+    ".                .             topic"
+    ".                .             timestamp"
+    "image            image         image"
+    "body             body          body"
+    ".                .             author"
+    "vote-widget      vote-widget   comment-button"
+    "comment-list     comment-list  comment-list";
 }
 
 .hiddenOnSmallScreen {
@@ -100,4 +100,16 @@ img {
 .vote-widget {
   display: flex;
   gap: 5px;
+}
+
+.vote-widget button {
+  margin: 10px;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.vote-widget .error {
+  padding: 10px 0;
 }
