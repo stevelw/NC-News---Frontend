@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
 import { getArticle } from "../utils/api";
@@ -10,6 +10,7 @@ export default function Article({ topics }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,6 +46,12 @@ export default function Article({ topics }) {
           />
         ) : (
           <>
+            <p
+              style={{ textDecoration: "underline" }}
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </p>
             <h2 style={{ gridArea: "headline" }}>
               {isLoading ? "Loading..." : article.title}
             </h2>
