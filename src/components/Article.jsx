@@ -17,16 +17,8 @@ export default function Article({ topics }) {
     setIsError(false);
 
     getArticle(articleId)
-      .then(({ author, title, body, topic, created_at, article_img_url }) => {
-        const timestamp = new Date(created_at).toDateString();
-        setArticle({
-          author,
-          title,
-          body,
-          topic: topics[topic] ?? topic,
-          timestamp,
-          article_img_url,
-        });
+      .then((returnedArticle) => {
+        setArticle(returnedArticle);
         setIsLoading(false);
       })
       .catch((err) => setIsError(true));
@@ -69,7 +61,7 @@ export default function Article({ topics }) {
                 textAlign: "right",
               }}
             >
-              {article.timestamp}
+              {new Date(article.created_at).toDateString()}
             </p>
             <img
               style={{ gridArea: "image" }}
