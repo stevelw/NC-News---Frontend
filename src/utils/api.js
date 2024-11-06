@@ -40,6 +40,17 @@ export function getArticle(articleId) {
     });
 }
 
+export function incrementVotes(articleId) {
+  return network
+    .patch(`/articles/${articleId}`, {
+      inc_votes: 1,
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}
+
 export function getComments(articleId) {
   return network
     .get(`/articles/${articleId}/comments`)
