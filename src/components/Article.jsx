@@ -5,6 +5,7 @@ import { getArticle } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
+import CommentComposer from "./CommentComposer";
 
 export default function Article({ topics }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
@@ -85,6 +86,7 @@ export default function Article({ topics }) {
               {article.author}
             </p>
             <Vote />
+            <CommentComposer />
             <CommentList />
           </>
         )}
