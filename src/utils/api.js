@@ -39,3 +39,15 @@ export function getArticle(articleId) {
       throw err;
     });
 }
+
+export function getComments(articleId) {
+  return network
+    .get(`/articles/${articleId}/comments`)
+    .then((response) => {
+      return response.data.comments;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}

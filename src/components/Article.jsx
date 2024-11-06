@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
-import Vote from "./Vote";
 import { getArticle } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
@@ -15,6 +14,7 @@ export default function Article({ topics }) {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
+
     getArticle(articleId)
       .then(({ author, title, body, topic, created_at, article_img_url }) => {
         const timestamp = new Date(created_at).toDateString();
@@ -33,28 +33,10 @@ export default function Article({ topics }) {
 
   return (
     <>
-      <div className="hidden">
+      <div className="hiddenOnSmallScreen">
         <HeaderElement />
       </div>
       <div className="article-grid">
-        <p
-          style={{
-            gridArea: "top-left-button",
-            border: "red solid 1px",
-          }}
-        >
-          Back button
-        </p>
-        <p
-          className="hiddenOnLargeScreen"
-          style={{
-            gridArea: "top-right-button",
-            textAlign: "right",
-            border: "red solid 1px",
-          }}
-        >
-          Home button
-        </p>
         {isError ? (
           <ErrorComponent
             message={
@@ -102,6 +84,7 @@ export default function Article({ topics }) {
             >
               {article.author}
             </p>
+            <CommentList />
           </>
         )}
       </div>
