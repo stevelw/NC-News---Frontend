@@ -96,3 +96,8 @@ img {
   text-align: right;
   font-style: italic;
 }
+
+.vote-widget {
+  display: flex;
+  gap: 5px;
+}
