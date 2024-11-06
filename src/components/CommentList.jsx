@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { getComments } from "../utils/api";
 import ErrorComponent from "./ErrorComponent";
+import { useParams } from "react-router-dom";
 
-export default function CommentList({ articleId }) {
+export default function CommentList() {
+  const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -11,7 +13,7 @@ export default function CommentList({ articleId }) {
     setIsLoading(true);
     setIsError(false);
 
-    getComments()
+    getComments(articleId)
       .then((comments) => {
         setComments(comments);
         setIsLoading(false);
@@ -19,7 +21,7 @@ export default function CommentList({ articleId }) {
       .catch((err) => {
         setIsError(true);
       });
-  }, [articleId]);
+  }, []);
 
   return (
     <div style={{ gridArea: "comment-list" }}>
