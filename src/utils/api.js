@@ -41,12 +41,12 @@ export function getArticle(articleId) {
 }
 
 export function incrementVotes(articleId) {
-  return getComments(articleId)
-    .then(() => {
-      // Mock
-      return Promise.reject();
+  return network
+    .patch(`/articles/${articleId}`, {
+      inc_votes: 1,
     })
     .catch((err) => {
+      console.log(err);
       throw err;
     });
 }
