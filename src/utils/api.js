@@ -41,30 +41,13 @@ export function getArticle(articleId) {
 }
 
 export function getComments(articleId) {
-  return Promise.resolve([
-    {
-      comment_id: 9,
-      votes: 0,
-      created_at: "2020-01-01T03:08:00.000Z",
-      author: "icellusedkars",
-      body: "Superficially charming",
-      article_id: 1,
-    },
-    {
-      comment_id: 4,
-      votes: -100,
-      created_at: "2020-02-23T12:01:00.000Z",
-      author: "icellusedkars",
-      body: " I carry a log — yes. Is it funny to you? It is not to me.",
-      article_id: 1,
-    },
-    {
-      comment_id: 3,
-      votes: 100,
-      created_at: "2020-03-01T01:13:00.000Z",
-      author: "icellusedkars",
-      body: "Replacing the quiet elegance of the dark suit and tie with the casual indifference of these muted earth tones is a form of fashion suicide, but, uh, call me crazy — onyou it works.",
-      article_id: 1,
-    },
-  ]);
+  return network
+    .get(`/articles/${articleId}/comments`)
+    .then((response) => {
+      return response.data.comments;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
 }
