@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
 import { getArticle } from "../utils/api";
@@ -10,22 +10,15 @@ export default function Article({ topics }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
 
     getArticle(articleId)
-      .then(({ author, title, body, topic, created_at, article_img_url }) => {
-        const timestamp = new Date(created_at).toDateString();
-        setArticle({
-          author,
-          title,
-          body,
-          topic: topics[topic] ?? topic,
-          timestamp,
-          article_img_url,
-        });
+      .then((returnedArticle) => {
+        setArticle(returnedArticle);
         setIsLoading(false);
       })
       .catch((err) => setIsError(true));
@@ -45,6 +38,12 @@ export default function Article({ topics }) {
           />
         ) : (
           <>
+            <p
+              style={{ textDecoration: "underline" }}
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </p>
             <h2 style={{ gridArea: "headline" }}>
               {isLoading ? "Loading..." : article.title}
             </h2>
@@ -62,7 +61,7 @@ export default function Article({ topics }) {
                 textAlign: "right",
               }}
             >
-              {article.timestamp}
+              {new Date(article.created_at).toDateString()}
             </p>
             <img
               style={{ gridArea: "image" }}
