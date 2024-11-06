@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
-import Vote from "./Vote";
 import { getArticle } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
@@ -15,6 +14,7 @@ export default function Article({ topics }) {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
+
     getArticle(articleId)
       .then(({ author, title, body, topic, created_at, article_img_url }) => {
         const timestamp = new Date(created_at).toDateString();
