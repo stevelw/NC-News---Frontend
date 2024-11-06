@@ -37,24 +37,6 @@ export default function Article({ topics }) {
         <HeaderElement />
       </div>
       <div className="article-grid">
-        <p
-          style={{
-            gridArea: "top-left-button",
-            border: "red solid 1px",
-          }}
-        >
-          Back button
-        </p>
-        <p
-          className="hiddenOnLargeScreen"
-          style={{
-            gridArea: "top-right-button",
-            textAlign: "right",
-            border: "red solid 1px",
-          }}
-        >
-          Home button
-        </p>
         {isError ? (
           <ErrorComponent
             message={
