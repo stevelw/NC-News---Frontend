@@ -8,6 +8,11 @@ h1 {
   background: transparent;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .columns-2-1 {
   display: grid;
   grid-template-columns: 1fr;
