@@ -2,6 +2,7 @@ import ArticleCard from "./ArticleCard";
 import { getArticles } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
+import { Link, useSearchParams } from "react-router-dom";
 import Sorting from "./Sorting";
 
 export default function ArticleList({
@@ -18,8 +19,10 @@ export default function ArticleList({
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [sortBy, setSortBy] = useState("author");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    setSearchParams({ sort_by: sortBy });
     setIsLoading(true);
     setIsError(false);
     getArticles()
@@ -31,7 +34,7 @@ export default function ArticleList({
         setArticles([]);
         setIsError(true);
       });
-  }, []);
+  }, [sortBy]);
 
   return (
     <>
