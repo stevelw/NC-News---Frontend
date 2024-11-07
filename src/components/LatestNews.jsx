@@ -17,7 +17,11 @@ export default function LatestNews({ topics, isTopicsLoading, isTopicsError }) {
           isTopicsLoading={isTopicsLoading}
           isTopicsError={isTopicsError}
         />
-        <TopicList />
+        <TopicList
+          topics={topics}
+          isTopicsLoading={isTopicsLoading}
+          isTopicsError={isTopicsError}
+        />
       </Columns_2_1>
     </>
   );
