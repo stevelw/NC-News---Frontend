@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
 import { getArticle, getComments } from "../utils/api";
@@ -76,9 +76,13 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
                 textAlign: "right",
               }}
             >
-              {isTopicsError || isTopicsLoading
-                ? article.topic
-                : topics[article.topic]}
+              {isTopicsError || isTopicsLoading ? (
+                article.topic
+              ) : (
+                <Link to={"/topics/" + article.topic}>
+                  {topics[article.topic]}
+                </Link>
+              )}
             </p>
             <p
               style={{

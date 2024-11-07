@@ -63,9 +63,13 @@ export default function ArticleList({
                     <Link to={articleUrl}>
                       <h3>{title}</h3>
                     </Link>
-                    <p>
-                      {isTopicsError || isTopicsLoading ? topic : topics[topic]}
-                    </p>
+                    {isTopicsError || isTopicsLoading ? (
+                      <p>{topic}</p>
+                    ) : (
+                      <Link to={"/topics/" + topic}>
+                        <p>{topics[topic]}</p>
+                      </Link>
+                    )}
                   </div>
                   <img style={childStyle} src={article_img_url} alt="" />
                 </ArticleCard>

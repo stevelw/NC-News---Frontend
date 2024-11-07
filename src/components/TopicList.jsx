@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
   return (
     <>
@@ -14,7 +16,11 @@ export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
       ) : (
         <ul>
           {Object.keys(topics).map((slug) => {
-            return <li key={slug}>{topics[slug]}</li>;
+            return (
+              <li key={slug}>
+                <Link to={"/topics/" + slug}>{topics[slug]}</Link>
+              </li>
+            );
           })}
         </ul>
       )}
