@@ -103,7 +103,7 @@ export default function Article({ topics }) {
               {article.author}
             </p>
             <Vote />
-            <CommentComposer />
+            <CommentComposer setComments={setComments} />
             <CommentList comments={comments} isLoading={isCommentLoading} isError={isCommentError} />
           </>
         )}

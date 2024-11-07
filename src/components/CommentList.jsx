@@ -20,7 +20,7 @@ export default function CommentList({ comments, isLoading, isError }) {
         <>
           {comments.map(({ comment_id, created_at, author, body }) => {
             return (
-              <div key={comment_id} className="commentCard">
+              <div key={comment_id ?? Math.random()} className="commentCard">
                 <p className="comment">{body}</p>
                 <p className="author">{author}</p>
                 <p className="timestamp">
