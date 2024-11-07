@@ -16,19 +16,19 @@ export default function CommentList({ comments, isLoading, isError }) {
       ) : null}
       {isLoading && !isError ? (
         <p>Loading...</p>
+      ) : comments.length ? (
+        comments.map(({ comment_id, created_at, author, body }) => {
+          return (
+            <div key={comment_id ?? Math.random()} className="commentCard">
+              <p className="comment">{body}</p>
+              <p className="author">{author}</p>
+              <p className="timestamp">{new Date(created_at).toDateString()}</p>
+            </div>
+          );
+        })
       ) : (
         <>
-          {comments.map(({ comment_id, created_at, author, body }) => {
-            return (
-              <div key={comment_id ?? Math.random()} className="commentCard">
-                <p className="comment">{body}</p>
-                <p className="author">{author}</p>
-                <p className="timestamp">
-                  {new Date(created_at).toDateString()}
-                </p>
-              </div>
-            );
-          })}
+          <p>Be the first to add a comment.</p>
         </>
       )}
     </div>

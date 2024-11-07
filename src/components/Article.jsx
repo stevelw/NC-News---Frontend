@@ -10,7 +10,7 @@ import CommentComposer from "./CommentComposer";
 export default function Article({ topics }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState("");
   const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);
   const [isCommentLoading, setIsCommentLoading] = useState(true);
@@ -19,14 +19,16 @@ export default function Article({ topics }) {
 
   useEffect(() => {
     setIsLoading(true);
-    setIsError(false);
+    setIsError("");
 
     getArticle(articleId)
       .then((returnedArticle) => {
         setArticle(returnedArticle);
         setIsLoading(false);
       })
-      .catch((err) => setIsError(true));
+      .catch((err) => {
+        err.status === 404 ? setIsError("404") : setIsError("unhandled");
+      });
   }, []);
 
   useEffect(() => {
@@ -49,20 +51,22 @@ export default function Article({ topics }) {
         <HeaderElement />
       </div>
       <div className="article-grid">
-        {isError ? (
-          <ErrorComponent
-            message={
-              "Error loading article. Check your network connection and try again"
-            }
-          />
-        ) : (
+        <p style={{ textDecoration: "underline" }} onClick={() => navigate(-1)}>
+          Back
+        </p>
+        {isError && (
+          <div style={{ gridArea: "body" }}>
+            <ErrorComponent
+              message={
+                isError === "404"
+                  ? "Sorry, that article doesn't exist."
+                  : "Error loading article. Check your network connection and try again"
+              }
+            />
+          </div>
+        )}
+        {!isError && (
           <>
-            <p
-              style={{ textDecoration: "underline" }}
-              onClick={() => navigate(-1)}
-            >
-              Back
-            </p>
             <h2 style={{ gridArea: "headline" }}>
               {isLoading ? "Loading..." : article.title}
             </h2>
