@@ -36,7 +36,7 @@ img {
     "image            image         image"
     "body             body          body"
     ".                .             author"
-    "vote-widget      vote-widget   comment-button"
+    "vote-widget      comment       comment"
     "comment-list     comment-list  comment-list";
 }
 
@@ -62,18 +62,19 @@ img {
       "grid2 .";
   }
   .article-grid {
-    grid-template-columns: 3fr 3fr 1fr 2fr 2fr;
+    grid-template-columns: 3fr 3fr 1fr 3fr 1fr;
     grid-template-areas:
-      "top-left-button  .         image         image           image"
-      "headline         topic     image         image           image"
-      ".                timestamp image         image           image"
-      "body             body      image         image           image"
-      "body             body      vote-widget   comment-button  author"
-      "body             body      comment-list  comment-list    comment-list";
+      "top-left-button  .         image         image         image"
+      "headline         topic     image         image         image"
+      ".                timestamp image         image         image"
+      "body             body      image         image         image"
+      "body             body      .             .             author"
+      "body             body      vote-widget   comment       ."
+      "body             body      comment-list  comment-list  comment-list";
   }
 }
 
-.commentBox {
+.commentCard {
   background-color: #223f55;
   padding: 5px 10px;
   margin: 5px 0;
@@ -112,4 +113,17 @@ img {
 
 .vote-widget .error {
   padding: 10px 0;
+}
+
+form * {
+  width: 100%;
+  margin: 5px;
+}
+
+.leave-a-comment-button {
+  height: 4em;
+}
+
+.comment-input {
+  height: 5em;
 }

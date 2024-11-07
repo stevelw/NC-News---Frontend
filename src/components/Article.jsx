@@ -1,16 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
-import { getArticle } from "../utils/api";
+import { getArticle, getComments } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
+import CommentComposer from "./CommentComposer";
 
 export default function Article({ topics }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
+  const [comments, setComments] = useState([]);
+  const [isCommentLoading, setIsCommentLoading] = useState(true);
+  const [isCommentError, setIsCommentError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +27,20 @@ export default function Article({ topics }) {
         setIsLoading(false);
       })
       .catch((err) => setIsError(true));
+  }, []);
+
+  useEffect(() => {
+    setIsCommentLoading(true);
+    setIsCommentError(false);
+
+    getComments(articleId)
+      .then((comments) => {
+        setComments(comments);
+        setIsCommentLoading(false);
+      })
+      .catch((err) => {
+        setIsCommentError(true);
+      });
   }, []);
 
   return (
@@ -85,7 +103,8 @@ export default function Article({ topics }) {
               {article.author}
             </p>
             <Vote />
-            <CommentList />
+            <CommentComposer setComments={setComments} setIsError={setIsCommentError} />
+            <CommentList comments={comments} isLoading={isCommentLoading} isError={isCommentError} />
           </>
         )}
       </div>

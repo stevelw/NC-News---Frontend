@@ -55,7 +55,19 @@ export function getComments(articleId) {
   return network
     .get(`/articles/${articleId}/comments`)
     .then((response) => {
-      return response.data.comments;
+      return response.data.comments.reverse();
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}
+
+export function postComment(article_id, comment, username) {
+  return network
+    .post(`/articles/${article_id}/comments`, {
+      username,
+      body: comment,
     })
     .catch((err) => {
       console.log(err);
