@@ -25,7 +25,7 @@ export default function ArticleList({
     setSearchParams({ sort_by: sortBy });
     setIsLoading(true);
     setIsError(false);
-    getArticles()
+    getArticles();
     getArticles(sortBy)
       .then((articlesReceived) => {
         setArticles(articlesReceived);
@@ -59,28 +59,31 @@ export default function ArticleList({
             .filter(({ topic }) => {
               return !filterTopic || topic === filterTopic;
             })
-            .map(({ article_id, title, topic, article_img_url }) => {
-              const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
-              const articleUrl =
-                "/articles/" + urlFriendlyTitle + "-" + article_id;
-              return (
-                <ArticleCard key={article_id}>
-                  <div style={childStyle}>
-                    <Link to={articleUrl}>
-                      <h3>{title}</h3>
-                    </Link>
-                    {isTopicsError || isTopicsLoading ? (
-                      <p>{topic}</p>
-                    ) : (
-                      <Link to={"/topics/" + topic}>
-                        <p>{topics[topic]}</p>
+            .map(
+              ({ article_id, title, topic, article_img_url, created_at }) => {
+                const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
+                const articleUrl =
+                  "/articles/" + urlFriendlyTitle + "-" + article_id;
+                return (
+                  <ArticleCard key={article_id}>
+                    <div style={childStyle}>
+                      <Link to={articleUrl}>
+                        <h3>{title}</h3>
                       </Link>
-                    )}
-                  </div>
-                  <img style={childStyle} src={article_img_url} alt="" />
-                </ArticleCard>
-              );
-            })}
+                      {isTopicsError || isTopicsLoading ? (
+                        <p>{topic}</p>
+                      ) : (
+                        <Link to={"/topics/" + topic}>
+                          <p>{topics[topic]}</p>
+                        </Link>
+                      )}
+                      <p>{new Date(created_at).toDateString()}</p>
+                    </div>
+                    <img style={childStyle} src={article_img_url} alt="" />
+                  </ArticleCard>
+                );
+              }
+            )}
         </div>
       )}
     </>
