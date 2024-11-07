@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+
 export default function CommentComposer() {
+  const {user} = useContext(UserContext)
+
   return (
     <form style={{gridArea: 'comment'}}>
       <button className="leave-a-comment-button">Leave a comment</button>
