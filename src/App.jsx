@@ -4,11 +4,16 @@ import LatestNews from "./components/LatestNews";
 import Article from "./components/Article";
 import { useEffect, useState } from "react";
 import { getTopics } from "./utils/api";
+import Topic from "./components/Topic";
 
 function App() {
   const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
 
   useEffect(() => {
+    setIsTopicsLoading(true);
+    setIsTopicsError(false);
     getTopics()
       .then((topicsList) => {
         const topicsLookup = {};
@@ -16,18 +21,45 @@ function App() {
           topicsLookup[slug] = description;
         });
         setTopics(topicsLookup);
+        setIsTopicsLoading(false);
       })
       .catch((err) => {
         setTopics({});
+        setIsTopicsError(true);
       });
   }, []);
 
   return (
     <Routes>
-      <Route path="/" element={<LatestNews topics={topics} />} />
+      <Route
+        path="/"
+        element={
+          <LatestNews
+            topics={topics}
+            isTopicsLoading={isTopicsLoading}
+            isTopicsError={isTopicsError}
+          />
+        }
+      />
       <Route
         path="/articles/:articleUrl"
-        element={<Article topics={topics} />}
+        element={
+          <Article
+            topics={topics}
+            isTopicsLoading={isTopicsLoading}
+            isTopicsError={isTopicsError}
+          />
+        }
+      />
+      <Route
+        path="/topics/:topicSlug"
+        element={
+          <Topic
+            topics={topics}
+            isTopicsLoading={isTopicsLoading}
+            isTopicsError={isTopicsError}
+          />
+        }
       />
     </Routes>
   );
