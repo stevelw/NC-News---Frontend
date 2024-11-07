@@ -7,7 +7,7 @@ import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
 import CommentComposer from "./CommentComposer";
 
-export default function Article({ topics }) {
+export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState("");
@@ -76,7 +76,9 @@ export default function Article({ topics }) {
                 textAlign: "right",
               }}
             >
-              {article.topic}
+              {isTopicsError || isTopicsLoading
+                ? article.topic
+                : topics[article.topic]}
             </p>
             <p
               style={{

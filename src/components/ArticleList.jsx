@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import { Link } from "react-router-dom";
 
-export default function ArticleList({ topics }) {
+export default function ArticleList({
+  topics,
+  isTopicsLoading,
+  isTopicsError,
+}) {
   const childStyle = {
     maxWidth: "45%",
   };
@@ -54,7 +58,9 @@ export default function ArticleList({ topics }) {
                   <Link to={articleUrl}>
                     <h3>{title}</h3>
                   </Link>
-                  <p>{topics[topic] ?? topic}</p>
+                  <p>
+                    {isTopicsError || isTopicsLoading ? topic : topics[topic]}
+                  </p>
                 </div>
                 <img style={childStyle} src={article_img_url} alt="" />
               </ArticleCard>
