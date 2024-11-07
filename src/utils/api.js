@@ -35,7 +35,7 @@ export function getArticle(articleId) {
       return response.data.article;
     })
     .catch((err) => {
-      console.log(err);
+      if (err.status !== 404) console.log(err);
       throw err;
     });
 }
@@ -58,7 +58,7 @@ export function getComments(articleId) {
       return response.data.comments.reverse();
     })
     .catch((err) => {
-      console.log(err);
+      if (err.status !== 404) console.log(err);
       throw err;
     });
 }
