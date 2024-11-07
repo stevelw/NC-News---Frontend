@@ -133,12 +133,23 @@ a {
   border: none;
 }
 
-.vote-widget {
+.widget-sort {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin: 10px;
+}
+
+.widget-sort p {
+  margin: 0;;
+}
+
+.widget-vote {
   display: flex;
   gap: 5px;
 }
 
-.vote-widget button {
+.widget-vote button {
   margin: 10px;
   padding: 0;
   height: 40px;
@@ -146,7 +157,7 @@ a {
   border-radius: 50%;
 }
 
-.vote-widget .error {
+.widget-vote .error {
   padding: 10px 0;
 }
 

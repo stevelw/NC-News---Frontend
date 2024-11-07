@@ -1,8 +1,8 @@
 import ArticleCard from "./ArticleCard";
-import { getLatestArticles } from "../utils/api";
+import { getArticles } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
-import { Link } from "react-router-dom";
+import Sorting from "./Sorting";
 
 export default function ArticleList({
   topics,
@@ -17,11 +17,12 @@ export default function ArticleList({
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [sortBy, setSortBy] = useState("author");
 
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    getLatestArticles()
+    getArticles()
       .then((articlesReceived) => {
         setArticles(articlesReceived);
         setIsLoading(false);
@@ -49,6 +50,7 @@ export default function ArticleList({
             gridArea: "grid1",
           }}
         >
+          <Sorting sortBy={sortBy} setSortBy={setSortBy} options={["Date"]} />
           {articles
             .filter(({ topic }) => {
               return !filterTopic || topic === filterTopic;

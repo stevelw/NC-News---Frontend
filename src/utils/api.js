@@ -4,7 +4,7 @@ const network = axios.create({
   baseURL: "https://nc-news-gjzo.onrender.com/api",
 });
 
-export function getLatestArticles() {
+export function getArticles() {
   return network
     .get("/articles")
     .then((response) => {
