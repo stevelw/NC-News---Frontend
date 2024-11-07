@@ -26,6 +26,7 @@ export default function ArticleList({
     setIsLoading(true);
     setIsError(false);
     getArticles()
+    getArticles(sortBy)
       .then((articlesReceived) => {
         setArticles(articlesReceived);
         setIsLoading(false);

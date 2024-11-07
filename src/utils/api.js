@@ -4,9 +4,17 @@ const network = axios.create({
   baseURL: "https://nc-news-gjzo.onrender.com/api",
 });
 
-export function getArticles() {
+export function getArticles(sortBy) {
+  var sort_by = "created_at";
+
+  if (sortBy === "Date") sort_by = "created_at";
+
   return network
-    .get("/articles")
+    .get("/articles", {
+      params: {
+        sort_by,
+      },
+    })
     .then((response) => {
       return response.data.articles;
     })
