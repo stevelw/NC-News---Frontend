@@ -3,7 +3,6 @@ import ArticleList from "./ArticleList";
 import HeaderElement from "./HeaderElement";
 import TopicList from "./TopicList";
 import Columns_2_1 from "../styles/Columns_2_1";
-import LoadButton from "./LoadButton";
 
 export default function LatestNews({ topics, isTopicsLoading, isTopicsError }) {
   return (
@@ -18,7 +17,6 @@ export default function LatestNews({ topics, isTopicsLoading, isTopicsError }) {
           isTopicsLoading={isTopicsLoading}
           isTopicsError={isTopicsError}
         />
-        <LoadButton />
         <TopicList />
       </Columns_2_1>
     </>
