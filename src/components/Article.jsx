@@ -84,7 +84,7 @@ export default function Article({ topics }) {
                 textAlign: "right",
               }}
             >
-              {new Date(article.created_at).toDateString()}
+              {article.created_at && new Date(article.created_at).toDateString()}
             </p>
             <img
               style={{ gridArea: "image" }}
