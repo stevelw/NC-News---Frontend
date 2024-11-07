@@ -1,27 +1,8 @@
-import { useState, useEffect } from "react";
-import { getComments } from "../utils/api";
 import ErrorComponent from "./ErrorComponent";
 import { useParams } from "react-router-dom";
 
-export default function CommentList() {
+export default function CommentList({ comments, isLoading, isError }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
-  const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    setIsError(false);
-
-    getComments(articleId)
-      .then((comments) => {
-        setComments(comments);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsError(true);
-      });
-  }, []);
 
   return (
     <div style={{ gridArea: "comment-list" }}>
