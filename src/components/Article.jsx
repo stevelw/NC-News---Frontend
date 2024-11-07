@@ -107,8 +107,16 @@ export default function Article({ topics }) {
               {article.author}
             </p>
             <Vote />
-            <CommentComposer setComments={setComments} setIsError={setIsCommentError} />
-            <CommentList comments={comments} isLoading={isCommentLoading} isError={isCommentError} />
+            <CommentComposer
+              setComments={setComments}
+              setIsError={setIsCommentError}
+            />
+            <CommentList
+              comments={comments}
+              setComments={setComments}
+              isLoading={isCommentLoading}
+              isError={isCommentError}
+            />
           </>
         )}
       </div>
