@@ -74,3 +74,10 @@ export function postComment(article_id, comment, username) {
       throw err;
     });
 }
+
+export function deleteComment(comment_id) {
+  return network.delete(`/comments/${comment_id}`).catch((err) => {
+    console.log(err);
+    throw err;
+  });
+}

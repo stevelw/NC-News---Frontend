@@ -84,7 +84,7 @@ export default function Article({ topics }) {
                 textAlign: "right",
               }}
             >
-              {new Date(article.created_at).toDateString()}
+              {article.created_at && new Date(article.created_at).toDateString()}
             </p>
             <img
               style={{ gridArea: "image" }}
@@ -107,8 +107,16 @@ export default function Article({ topics }) {
               {article.author}
             </p>
             <Vote />
-            <CommentComposer setComments={setComments} setIsError={setIsCommentError} />
-            <CommentList comments={comments} isLoading={isCommentLoading} isError={isCommentError} />
+            <CommentComposer
+              setComments={setComments}
+              setIsError={setIsCommentError}
+            />
+            <CommentList
+              comments={comments}
+              setComments={setComments}
+              isLoading={isCommentLoading}
+              isError={isCommentError}
+            />
           </>
         )}
       </div>
