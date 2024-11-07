@@ -3,7 +3,7 @@ import { postComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
-export default function CommentComposer({ setComments }) {
+export default function CommentComposer({ setComments, setIsError }) {
   const { user } = useContext(UserContext);
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [commentInput, setCommentInput] = useState("");
@@ -25,7 +25,10 @@ export default function CommentComposer({ setComments }) {
       .then(() => {
         setCommentInput("");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setIsError(true);
+        setComments((currentComments) => currentComments.slice(1));
+      });
   }
 
   return (
