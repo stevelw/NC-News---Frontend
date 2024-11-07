@@ -4,6 +4,7 @@ import LatestNews from "./components/LatestNews";
 import Article from "./components/Article";
 import { useEffect, useState } from "react";
 import { getTopics } from "./utils/api";
+import Topic from "./components/Topic";
 
 function App() {
   const [topics, setTopics] = useState({});
@@ -45,7 +46,17 @@ function App() {
         element={
           <Article
             topics={topics}
-            isTopicsLoading={isTopicsError}
+            isTopicsLoading={isTopicsLoading}
+            isTopicsError={isTopicsError}
+          />
+        }
+      />
+      <Route
+        path="/topics/:topicSlug"
+        element={
+          <Topic
+            topics={topics}
+            isTopicsLoading={isTopicsLoading}
             isTopicsError={isTopicsError}
           />
         }

@@ -8,6 +8,7 @@ export default function ArticleList({
   topics,
   isTopicsLoading,
   isTopicsError,
+  filterTopic,
 }) {
   const childStyle = {
     maxWidth: "45%",
@@ -48,24 +49,28 @@ export default function ArticleList({
             gridArea: "grid1",
           }}
         >
-          {articles.map(({ article_id, title, topic, article_img_url }) => {
-            const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
-            const articleUrl =
-              "/articles/" + urlFriendlyTitle + "-" + article_id;
-            return (
-              <ArticleCard key={article_id}>
-                <div style={childStyle}>
-                  <Link to={articleUrl}>
-                    <h3>{title}</h3>
-                  </Link>
-                  <p>
-                    {isTopicsError || isTopicsLoading ? topic : topics[topic]}
-                  </p>
-                </div>
-                <img style={childStyle} src={article_img_url} alt="" />
-              </ArticleCard>
-            );
-          })}
+          {articles
+            .filter(({ topic }) => {
+              return !filterTopic || topic === filterTopic;
+            })
+            .map(({ article_id, title, topic, article_img_url }) => {
+              const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
+              const articleUrl =
+                "/articles/" + urlFriendlyTitle + "-" + article_id;
+              return (
+                <ArticleCard key={article_id}>
+                  <div style={childStyle}>
+                    <Link to={articleUrl}>
+                      <h3>{title}</h3>
+                    </Link>
+                    <p>
+                      {isTopicsError || isTopicsLoading ? topic : topics[topic]}
+                    </p>
+                  </div>
+                  <img style={childStyle} src={article_img_url} alt="" />
+                </ArticleCard>
+              );
+            })}
         </div>
       )}
     </>
