@@ -5,6 +5,7 @@ import Article from "./components/Article";
 import { useEffect, useState } from "react";
 import { getTopics } from "./utils/api";
 import Topic from "./components/Topic";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [topics, setTopics] = useState({});
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="*" element={<NotFound />} />
       <Route
         path="/"
         element={
