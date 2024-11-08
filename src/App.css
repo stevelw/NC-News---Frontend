@@ -110,6 +110,10 @@
   max-width: 45%;
 }
 
+.article-card__image {
+  height: auto;
+}
+
 /* Old to import */
 
 * {

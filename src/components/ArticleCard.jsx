@@ -36,7 +36,11 @@ export default function ArticleCard({
         </p>
         <p>&#128077; {votes}</p>
       </div>
-      <img className="article-card__section" src={article_img_url} alt="" />
+      <img
+        className="article-card__section article-card__image"
+        src={article_img_url}
+        alt=""
+      />
     </div>
   );
 }
