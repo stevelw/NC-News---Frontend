@@ -39,7 +39,7 @@ export default function CommentList({
   }
 
   return (
-    <div style={{ gridArea: "comment-list" }}>
+    <div className="comment-list">
       <h2>Comments</h2>
       {isError ? (
         <ErrorComponent
@@ -56,20 +56,22 @@ export default function CommentList({
             return (
               <div
                 key={comment_id ?? Math.random()}
-                className={disabled ? "commentCard-disabled" : "commentCard"}
+                className={
+                  "comment-card" + (disabled ? " comment-card--disabled" : "")
+                }
               >
                 {user.username === author && (
                   <button
                     onClick={() => handleDeleteComment(comment_id)}
-                    className="button-delete"
+                    className="comment-card__button"
                   >
                     &#x2717;
                   </button>
                 )}
-                {error && <p className="error">{error}</p>}
-                <p className="comment">{body}</p>
-                <p className="author">{author}</p>
-                <p className="timestamp">
+                {error && <p className="comment-card__error">{error}</p>}
+                <p className="comment-card__comment">{body}</p>
+                <p className="comment-card__author">{author}</p>
+                <p className="comment-card__timestamp">
                   {new Date(created_at).toDateString()}
                 </p>
               </div>

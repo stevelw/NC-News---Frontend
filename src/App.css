@@ -135,6 +135,61 @@
   height: 5em;
 }
 
+/* Comment list */
+
+.comment-list {
+  grid-area: comment-list;
+}
+
+/* Comment card */
+
+.comment-card {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  margin: 5px 0;
+  background-color: #223f55;
+  color: #f8f9f9;
+}
+
+.comment-card--disabled {
+  background-color: #697d8c;
+  color: #b1bbc2;
+}
+
+.comment-card--disabled::before {
+  content: "Deleting...";
+}
+
+.comment-card__button {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.comment-card--disabled .comment-card__button {
+  visibility: hidden;
+}
+
+.comment-card__comment {
+  background-color: transparent;
+}
+
+.comment-card__author {
+  background-color: transparent;
+  text-align: right;
+}
+
+.comment-card__timestamp {
+  background-color: transparent;
+  text-align: right;
+  font-style: italic;
+}
+
+.comment-card__error {
+  background-color: transparent;
+  color: red;
+}
+
 /* Old to import */
 
 * {
@@ -182,59 +237,9 @@ a {
   }
 }
 
-.commentCard .commentCard-disabled {
-  padding: 5px 10px;
-  margin: 5px 0;
-}
-
-.commentCard {
-  background-color: #223f55;
-}
-
-.commentCard * {
-  color: #f8f9f9;
-}
-
-.commentCard-disabled {
-  background-color: #697d8c;
-}
-
-.commentCard-disabled::before {
-  content: "Deleting...";
-}
-
-.commentCard-disabled * {
-  color: #b1bbc2;
-}
-
-.commentCard-disabled button {
-  visibility: hidden;
-}
-
-.comment {
-  background-color: transparent;
-}
-
 .error {
   background-color: transparent;
   color: red;
-}
-
-.author {
-  background-color: transparent;
-  text-align: right;
-}
-
-.timestamp {
-  background-color: transparent;
-  text-align: right;
-  font-style: italic;
-}
-
-.button-delete {
-  background-color: red;
-  color: white;
-  border: none;
 }
 
 .widget-sort {
