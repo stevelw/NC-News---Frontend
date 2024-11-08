@@ -18,6 +18,8 @@ I built this as a portfolio project while on the _[Northcoders](https://northcod
 
 ## How to run and test locally
 
+Requires [Node.js](https://nodejs.org/en/download/package-manager) _v22.3.0+_
+
 1. Clone the repo from [github.com/stevelw/fe-nc-news.git](https://github.com/stevelw/fe-nc-news.git)
 
    `git clone https://github.com/stevelw/fe-nc-news.git`
