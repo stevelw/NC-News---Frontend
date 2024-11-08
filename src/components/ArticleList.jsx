@@ -25,7 +25,6 @@ export default function ArticleList({
     setSearchParams({ sort_by: sortBy });
     setIsLoading(true);
     setIsError(false);
-    getArticles();
     getArticles(sortBy)
       .then((articlesReceived) => {
         setArticles(articlesReceived);
