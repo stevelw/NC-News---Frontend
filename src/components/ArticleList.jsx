@@ -60,7 +60,14 @@ export default function ArticleList({
               return !filterTopic || topic === filterTopic;
             })
             .map(
-              ({ article_id, title, topic, article_img_url, created_at }) => {
+              ({
+                article_id,
+                title,
+                topic,
+                article_img_url,
+                created_at,
+                comment_count,
+              }) => {
                 const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
                 const articleUrl =
                   "/articles/" + urlFriendlyTitle + "-" + article_id;
@@ -78,6 +85,9 @@ export default function ArticleList({
                         </Link>
                       )}
                       <p>{new Date(created_at).toDateString()}</p>
+                      <p>
+                        {comment_count} comment{comment_count > 1 && "s"}
+                      </p>
                     </div>
                     <img style={childStyle} src={article_img_url} alt="" />
                   </ArticleCard>
