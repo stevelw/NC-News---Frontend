@@ -71,6 +71,7 @@ export default function ArticleList({
                 article_img_url,
                 created_at,
                 comment_count,
+                votes,
               }) => {
                 const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
                 const articleUrl =
@@ -92,6 +93,7 @@ export default function ArticleList({
                       <p>
                         {comment_count} comment{comment_count > 1 && "s"}
                       </p>
+                      <p>&#128077; {votes}</p>
                     </div>
                     <img style={childStyle} src={article_img_url} alt="" />
                   </ArticleCard>
