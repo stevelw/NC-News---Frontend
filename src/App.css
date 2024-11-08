@@ -86,6 +86,21 @@
   text-align: right;
 }
 
+/* Article card */
+
+.article-card {
+  box-sizing: border-box;
+  color: #223f55;
+  background: #f8f9f9;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.article-card__section {
+  max-width: 45%;
+}
+
 /* Old to import */
 
 * {
