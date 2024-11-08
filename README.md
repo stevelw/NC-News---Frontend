@@ -26,6 +26,8 @@ Requires [Node.js](https://nodejs.org/en/download/package-manager) _v22.3.0+_
 
 2. Install the development dependencies
 
+   `cd fe-nc-news`
+
    `npm install -d`
 
 3. Launch the local server
