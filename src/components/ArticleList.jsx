@@ -57,7 +57,7 @@ export default function ArticleList({
           <Sorting
             sortBy={sortBy}
             setSortBy={setSortBy}
-            options={["Date", "Comments"]}
+            options={["Date", "Votes", "Comments"]}
           />
           {articles
             .filter(({ topic }) => {

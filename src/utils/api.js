@@ -14,6 +14,9 @@ export function getArticles(sortBy) {
     case "Comments":
       sort_by = "comment_count";
       break;
+    case "Votes":
+      sort_by = "votes";
+      break;
     default:
       sort_by = "created_at";
       break;
