@@ -1,5 +1,13 @@
-export default function Sorting({ sortBy, setSortBy, options }) {
+export default function Sorting({
+  sortBy,
+  setSortBy,
+  isSortDesc,
+  setIsSortDesc,
+  options,
+}) {
   function handleClick(option) {
+    if (sortBy === option)
+      setIsSortDesc((currentSortOrder) => !currentSortOrder);
     setSortBy(option);
   }
 
@@ -10,10 +18,19 @@ export default function Sorting({ sortBy, setSortBy, options }) {
         return (
           <button
             key={option}
-            disabled={sortBy === option}
+            className={sortBy === option ? "selected" : ""}
             onClick={() => handleClick(option)}
           >
-            {option}
+            {option}{" "}
+            {sortBy === option ? (
+              isSortDesc ? (
+                <>&darr;</>
+              ) : (
+                <>&uarr;</>
+              )
+            ) : (
+              <>&nbsp;</>
+            )}
           </button>
         );
       })}

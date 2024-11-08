@@ -149,7 +149,7 @@ a {
   color: #f8f9f9;
 }
 
-.widget-sort button:disabled {
+.widget-sort .selected {
   border: none;
   background-color: #697d8c;
   color: #b1bbc2;

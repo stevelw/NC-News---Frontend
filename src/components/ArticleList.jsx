@@ -19,13 +19,17 @@ export default function ArticleList({
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [sortBy, setSortBy] = useState("Date");
+  const [isSortDesc, setIsSortDesc] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setSearchParams({ sort_by: sortBy });
+    setSearchParams({
+      sort_by: sortBy,
+      sort_order: isSortDesc ? "DESC" : "ASC",
+    });
     setIsLoading(true);
     setIsError(false);
-    getArticles(sortBy)
+    getArticles(sortBy, isSortDesc ? "DESC" : "ASC")
       .then((articlesReceived) => {
         setArticles(articlesReceived);
         setIsLoading(false);
@@ -34,7 +38,7 @@ export default function ArticleList({
         setArticles([]);
         setIsError(true);
       });
-  }, [sortBy]);
+  }, [sortBy, isSortDesc]);
 
   return (
     <>
@@ -56,6 +60,8 @@ export default function ArticleList({
           <Sorting
             sortBy={sortBy}
             setSortBy={setSortBy}
+            isSortDesc={isSortDesc}
+            setIsSortDesc={setIsSortDesc}
             options={["Date", "Votes", "Comments"]}
           />
           {articles
