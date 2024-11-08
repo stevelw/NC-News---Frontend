@@ -1,8 +1,9 @@
 import ArticleCard from "./ArticleCard";
-import { getLatestArticles } from "../utils/api";
+import { getArticles } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import Sorting from "./Sorting";
 
 export default function ArticleList({
   topics,
@@ -10,18 +11,21 @@ export default function ArticleList({
   isTopicsError,
   filterTopic,
 }) {
-  const childStyle = {
-    maxWidth: "45%",
-  };
-
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [sortBy, setSortBy] = useState("Date");
+  const [isSortDesc, setIsSortDesc] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    setSearchParams({
+      sort_by: sortBy,
+      sort_order: isSortDesc ? "DESC" : "ASC",
+    });
     setIsLoading(true);
     setIsError(false);
-    getLatestArticles()
+    getArticles(sortBy, isSortDesc ? "DESC" : "ASC")
       .then((articlesReceived) => {
         setArticles(articlesReceived);
         setIsLoading(false);
@@ -30,7 +34,7 @@ export default function ArticleList({
         setArticles([]);
         setIsError(true);
       });
-  }, []);
+  }, [sortBy, isSortDesc]);
 
   return (
     <>
@@ -49,30 +53,26 @@ export default function ArticleList({
             gridArea: "grid1",
           }}
         >
+          <Sorting
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            isSortDesc={isSortDesc}
+            setIsSortDesc={setIsSortDesc}
+            options={["Date", "Votes", "Comments"]}
+          />
           {articles
             .filter(({ topic }) => {
               return !filterTopic || topic === filterTopic;
             })
-            .map(({ article_id, title, topic, article_img_url }) => {
-              const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
-              const articleUrl =
-                "/articles/" + urlFriendlyTitle + "-" + article_id;
+            .map((article) => {
               return (
-                <ArticleCard key={article_id}>
-                  <div style={childStyle}>
-                    <Link to={articleUrl}>
-                      <h3>{title}</h3>
-                    </Link>
-                    {isTopicsError || isTopicsLoading ? (
-                      <p>{topic}</p>
-                    ) : (
-                      <Link to={"/topics/" + topic}>
-                        <p>{topics[topic]}</p>
-                      </Link>
-                    )}
-                  </div>
-                  <img style={childStyle} src={article_img_url} alt="" />
-                </ArticleCard>
+                <ArticleCard
+                  key={article.article_id}
+                  article={article}
+                  topics={topics}
+                  isTopicsLoading={isTopicsLoading}
+                  isTopicsError={isTopicsError}
+                />
               );
             })}
         </div>

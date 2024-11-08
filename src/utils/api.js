@@ -4,9 +4,31 @@ const network = axios.create({
   baseURL: "https://nc-news-gjzo.onrender.com/api",
 });
 
-export function getLatestArticles() {
+export function getArticles(sortBy, order) {
+  var sort_by;
+
+  switch (sortBy) {
+    case "Date":
+      sort_by = "created_at";
+      break;
+    case "Comments":
+      sort_by = "comment_count";
+      break;
+    case "Votes":
+      sort_by = "votes";
+      break;
+    default:
+      sort_by = "created_at";
+      break;
+  }
+
   return network
-    .get("/articles")
+    .get("/articles", {
+      params: {
+        sort_by,
+        order,
+      },
+    })
     .then((response) => {
       return response.data.articles;
     })

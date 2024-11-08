@@ -33,7 +33,7 @@ export default function vote() {
   }
 
   return (
-    <div className="vote-widget" style={{ gridArea: "vote-widget" }}>
+    <div className="widget-vote" style={{ gridArea: "vote-widget" }}>
       {isLoadError ? (
         <ErrorComponent message={`Likes aren't loading right now.`} />
       ) : (
