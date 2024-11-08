@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ErrorComponent from "./ErrorComponent";
 
 export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
   return (
