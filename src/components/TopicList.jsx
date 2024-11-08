@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
   return (
-    <>
+    <div style={{ gridArea: "grid3" }}>
       <h2>Topics</h2>
       {isTopicsError ? (
         <ErrorComponent
@@ -24,6 +24,6 @@ export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
           })}
         </ul>
       )}
-    </>
+    </div>
   );
 }
