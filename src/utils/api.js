@@ -5,9 +5,19 @@ const network = axios.create({
 });
 
 export function getArticles(sortBy) {
-  var sort_by = "created_at";
+  var sort_by;
 
-  if (sortBy === "Date") sort_by = "created_at";
+  switch (sortBy) {
+    case "Date":
+      sort_by = "created_at";
+      break;
+    case "Comments":
+      sort_by = "comment_count";
+      break;
+    default:
+      sort_by = "created_at";
+      break;
+  }
 
   return network
     .get("/articles", {

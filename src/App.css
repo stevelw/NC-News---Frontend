@@ -136,12 +136,23 @@ a {
 .widget-sort {
   display: flex;
   justify-content: flex-end;
-  gap: 5px;
   margin: 10px;
 }
 
 .widget-sort p {
-  margin: 0;;
+  margin: 0 5px;
+}
+
+.widget-sort button {
+  border: none;
+  background-color: #223f55;
+  color: #f8f9f9;
+}
+
+.widget-sort button:disabled {
+  border: none;
+  background-color: #697d8c;
+  color: #b1bbc2;
 }
 
 .widget-vote {

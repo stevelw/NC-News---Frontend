@@ -18,7 +18,7 @@ export default function ArticleList({
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [sortBy, setSortBy] = useState("author");
+  const [sortBy, setSortBy] = useState("Date");
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -54,7 +54,11 @@ export default function ArticleList({
             gridArea: "grid1",
           }}
         >
-          <Sorting sortBy={sortBy} setSortBy={setSortBy} options={["Date"]} />
+          <Sorting
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            options={["Date", "Comments"]}
+          />
           {articles
             .filter(({ topic }) => {
               return !filterTopic || topic === filterTopic;
