@@ -75,6 +75,8 @@
 
 .article__image {
   grid-area: image;
+  max-width: 100%;
+  height: auto;
 }
 
 .article__body {
