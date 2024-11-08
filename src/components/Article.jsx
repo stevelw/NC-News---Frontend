@@ -47,15 +47,15 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
 
   return (
     <>
-      <div className="hiddenOnSmallScreen">
+      <div className="header header--small-screen-hidden">
         <HeaderElement />
       </div>
-      <div className="article-grid">
-        <p style={{ textDecoration: "underline" }} onClick={() => navigate(-1)}>
+      <div className="article">
+        <p className="article__navigation" onClick={() => navigate(-1)}>
           Back
         </p>
         {isError && (
-          <div style={{ gridArea: "body" }}>
+          <div className="article__error">
             <ErrorComponent
               message={
                 isError === "404"
@@ -67,15 +67,10 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
         )}
         {!isError && (
           <>
-            <h2 style={{ gridArea: "headline" }}>
+            <h2 className="article__headline">
               {isLoading ? "Loading..." : article.title}
             </h2>
-            <p
-              style={{
-                gridArea: "topic",
-                textAlign: "right",
-              }}
-            >
+            <p className="article__topic">
               {isTopicsError || isTopicsLoading ? (
                 article.topic
               ) : (
@@ -84,16 +79,12 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
                 </Link>
               )}
             </p>
-            <p
-              style={{
-                gridArea: "timestamp",
-                textAlign: "right",
-              }}
-            >
-              {article.created_at && new Date(article.created_at).toDateString()}
+            <p className="article__timestamp">
+              {article.created_at &&
+                new Date(article.created_at).toDateString()}
             </p>
             <img
-              style={{ gridArea: "image" }}
+              className="article__image"
               src={
                 isLoading
                   ? "https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"
@@ -101,17 +92,8 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
               }
               alt=""
             />
-            <div style={{ gridArea: "body" }}>
-              <p>{article.body}</p>
-            </div>
-            <p
-              style={{
-                gridArea: "author",
-                textAlign: "right",
-              }}
-            >
-              {article.author}
-            </p>
+            <p className="article__body">{article.body}</p>
+            <p className="article__author">{article.author}</p>
             <Vote />
             <CommentComposer
               setComments={setComments}

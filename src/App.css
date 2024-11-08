@@ -1,3 +1,93 @@
+/* Header */
+
+.header {
+  box-sizing: border-box;
+  color: #223f55;
+}
+
+.header--small-screen-hidden {
+  display: none;
+}
+
+@media (min-width: 850px) {
+  .header--small-screen-hidden {
+    display: block;
+  }
+}
+
+/* Article */
+
+.article {
+  box-sizing: border-box;
+  color: #223f55;
+  background: #f8f9f9;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 1em;
+  grid-template-areas:
+    "top-left-button  .             top-right-button"
+    "headline         headline      headline"
+    ".                .             topic"
+    ".                .             timestamp"
+    "image            image         image"
+    "body             body          body"
+    ".                .             author"
+    "vote-widget      comment       comment"
+    "comment-list     comment-list  comment-list";
+}
+
+@media (min-width: 850px) {
+  .article {
+    grid-template-columns: 3fr 3fr 1fr 3fr 1fr;
+    grid-template-areas:
+      "top-left-button  .         image         image         image"
+      "headline         topic     image         image         image"
+      ".                timestamp image         image         image"
+      "body             body      image         image         image"
+      "body             body      .             .             author"
+      "body             body      vote-widget   comment       ."
+      "body             body      comment-list  comment-list  comment-list";
+  }
+}
+
+.article__navigation {
+  text-decoration: underline;
+}
+
+.article__error {
+  grid-area: body;
+}
+
+.article__headline {
+  grid-area: headline;
+}
+
+.article__topic {
+  grid-area: topic;
+  text-align: right;
+}
+
+.article__timestamp {
+  grid-area: timestamp;
+  text-align: right;
+}
+
+.article__image {
+  grid-area: image;
+}
+
+.article__body {
+  grid-area: body;
+}
+
+.article__author {
+  grid-area: author;
+  text-align: right;
+}
+
+/* Old to import */
+
 * {
   color: #223f55;
   background: #f8f9f9;
@@ -27,23 +117,6 @@ a {
     "grid3";
 }
 
-.article-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
-  gap: 1em;
-  grid-template-areas:
-    "top-left-button  .             top-right-button"
-    "headline         headline      headline"
-    ".                .             topic"
-    ".                .             timestamp"
-    "image            image         image"
-    "body             body          body"
-    ".                .             author"
-    "vote-widget      comment       comment"
-    "comment-list     comment-list  comment-list";
-}
-
 .hiddenOnSmallScreen {
   display: none;
 }
@@ -64,17 +137,6 @@ a {
     grid-template-areas:
       "grid1 grid3"
       "grid2 .";
-  }
-  .article-grid {
-    grid-template-columns: 3fr 3fr 1fr 3fr 1fr;
-    grid-template-areas:
-      "top-left-button  .         image         image         image"
-      "headline         topic     image         image         image"
-      ".                timestamp image         image         image"
-      "body             body      image         image         image"
-      "body             body      .             .             author"
-      "body             body      vote-widget   comment       ."
-      "body             body      comment-list  comment-list  comment-list";
   }
 }
 
