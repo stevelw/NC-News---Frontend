@@ -193,6 +193,13 @@
   color: red;
 }
 
+/* Load button */
+
+.load-button {
+  box-sizing: border-box;
+  grid-area: grid2;
+}
+
 /* Old to import */
 
 * {
