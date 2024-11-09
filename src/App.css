@@ -3,6 +3,9 @@
 .header {
   box-sizing: border-box;
   color: #223f55;
+  display: flex;
+  justify-content: space-between;
+  background: #bbbbbb;
 }
 
 .header--small-screen-hidden {
