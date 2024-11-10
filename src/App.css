@@ -233,6 +233,29 @@
   box-sizing: border-box;
 }
 
+/* Vote widget */
+
+.vote-widget {
+  display: flex;
+  gap: 5px;
+  box-sizing: border-box;
+  grid-area: vote-widget;
+}
+
+.vote-widget__button {
+  margin: 10px;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.vote-widget--error {
+  padding: 10px 0;
+  background-color: transparent;
+  color: red;
+}
+
 /* Old to import */
 
 * {
@@ -285,19 +308,4 @@ a {
   color: red;
 }
 
-.widget-vote {
-  display: flex;
-  gap: 5px;
-}
-
-.widget-vote button {
-  margin: 10px;
-  padding: 0;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-}
-
-.widget-vote .error {
-  padding: 10px 0;
-}
+*/

@@ -33,15 +33,17 @@ export default function vote() {
   }
 
   return (
-    <div className="widget-vote" style={{ gridArea: "vote-widget" }}>
+    <div className="vote-widget">
       {isLoadError ? (
         <ErrorComponent message={`Likes aren't loading right now.`} />
       ) : (
         <>
-          <button onClick={handleClick}>+1</button>
+          <button className="vote-widget__button" onClick={handleClick}>
+            +1
+          </button>
           <p>&#128077; {isLoading ? "..." : votes}</p>
           {isUpdateError && (
-            <p className="error">
+            <p className="vote-widget--error">
               Sorry, something went wrong. Please try again.
             </p>
           )}
