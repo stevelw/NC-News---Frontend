@@ -97,6 +97,8 @@ a:visited {
     ".                .             author"
     "vote-widget      comment       comment"
     "comment-list     comment-list  comment-list";
+  max-width: 800px;
+  margin: auto;
 }
 
 @media (min-width: 850px) {
@@ -152,6 +154,8 @@ a:visited {
   box-sizing: border-box;
   color: #223f55;
   grid-area: grid1;
+  max-width: 800px;
+  margin: auto;
 }
 
 /* Article card */
