@@ -191,6 +191,13 @@ a:visited {
 
 .comment-composer__button {
   height: 4em;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+}
+
+.comment-composer__button:hover {
+  background-color: #6c91bf;
 }
 
 .comment-composer__input {
@@ -304,6 +311,13 @@ a:visited {
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+}
+
+.vote-widget__button:hover {
+  background-color: #6c91bf;
 }
 
 .vote-widget--error {
