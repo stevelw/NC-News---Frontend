@@ -3,7 +3,7 @@ import ErrorComponent from "./ErrorComponent";
 
 export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
   return (
-    <div style={{ gridArea: "grid3" }}>
+    <div className="topic-list">
       <h2>Topics</h2>
       {isTopicsError ? (
         <ErrorComponent

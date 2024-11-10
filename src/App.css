@@ -226,6 +226,13 @@
   color: #b1bbc2;
 }
 
+/* Topic list */
+
+.topic-list {
+  grid-area: grid3;
+  box-sizing: border-box;
+}
+
 /* Old to import */
 
 * {
