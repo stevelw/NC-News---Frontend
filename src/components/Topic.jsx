@@ -5,7 +5,7 @@ import TopicList from "./TopicList";
 import ArticleList from "./ArticleList";
 
 export default function Topic({ topics, isTopicsLoading, isTopicsError }) {
-  const topicSlug = useParams().topicSlug;
+  const { topicSlug } = useParams();
   const navigate = useNavigate();
 
   return (

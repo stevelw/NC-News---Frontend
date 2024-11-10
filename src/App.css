@@ -35,6 +35,27 @@
   justify-content: center;
 }
 
+/* Latest News */
+
+.latest-news-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "grid1"
+    "grid2"
+    "grid3";
+}
+
+@media (min-width: 850px) {
+  .latest-news-grid {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "grid1 grid3"
+      "grid2 .";
+  }
+}
+
 /* Article */
 
 .article {
@@ -288,30 +309,8 @@ a {
   text-decoration: none;
 }
 
-.columns-2-1 {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "grid1"
-    "grid2"
-    "grid3";
-}
-
 .hiddenOnSmallScreen {
   display: none;
-}
-
-@media (min-width: 850px) {
-  .hiddenOnSmallScreen {
-    display: block;
-  }
-  .columns-2-1 {
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas:
-      "grid1 grid3"
-      "grid2 .";
-  }
 }
 
 .error {
