@@ -200,6 +200,29 @@
   grid-area: grid2;
 }
 
+/* Sorting widget */
+
+.sort-widget {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+
+.sort-widget__label {
+  margin: 0 5px;
+}
+
+.sort-widget__option {
+  border: none;
+  background-color: #223f55;
+  color: #f8f9f9;
+}
+
+.sort-widget__option--selected {
+  background-color: #697d8c;
+  color: #b1bbc2;
+}
+
 /* Old to import */
 
 * {
@@ -250,28 +273,6 @@ a {
 .error {
   background-color: transparent;
   color: red;
-}
-
-.widget-sort {
-  display: flex;
-  justify-content: flex-end;
-  margin: 10px;
-}
-
-.widget-sort p {
-  margin: 0 5px;
-}
-
-.widget-sort button {
-  border: none;
-  background-color: #223f55;
-  color: #f8f9f9;
-}
-
-.widget-sort .selected {
-  border: none;
-  background-color: #697d8c;
-  color: #b1bbc2;
 }
 
 .widget-vote {

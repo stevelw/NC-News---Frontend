@@ -12,25 +12,21 @@ export default function Sorting({
   }
 
   return (
-    <div className="widget-sort">
-      <p>Sort by</p>
-      {options.map((option) => {
+    <div className="sort-widget">
+      <p className="sort-widget__label">Sort by</p>
+      {options.map((optionText) => {
         return (
           <button
-            key={option}
-            className={sortBy === option ? "selected" : ""}
-            onClick={() => handleClick(option)}
+            key={optionText}
+            className={
+              "sort-widget__option" +
+              (sortBy === optionText ? " sort-widget__option--selected" : "")
+            }
+            onClick={() => handleClick(optionText)}
           >
-            {option}{" "}
-            {sortBy === option ? (
-              isSortDesc ? (
-                <>&darr;</>
-              ) : (
-                <>&uarr;</>
-              )
-            ) : (
-              <>&nbsp;</>
-            )}
+            {optionText}
+            {sortBy !== optionText && <>&nbsp;</>}
+            {sortBy === optionText && (isSortDesc ? <>&darr;</> : <>&uarr;</>)}
           </button>
         );
       })}
