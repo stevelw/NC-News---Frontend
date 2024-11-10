@@ -296,6 +296,12 @@ a:visited {
   box-sizing: border-box;
 }
 
+.topic-list__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* Vote widget */
 
 .vote-widget {

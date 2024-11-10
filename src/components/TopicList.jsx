@@ -15,7 +15,7 @@ export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
       {isTopicsLoading && !isTopicsError ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className="topic-list__list">
           {Object.keys(topics).map((slug) => {
             return (
               <li key={slug}>
