@@ -18,6 +18,12 @@
   }
 }
 
+/* Navigation button */
+
+.navigation-button {
+  text-decoration: underline;
+}
+
 /* Article */
 
 .article {
@@ -52,10 +58,6 @@
       "body             body      vote-widget   comment       ."
       "body             body      comment-list  comment-list  comment-list";
   }
-}
-
-.article__navigation {
-  text-decoration: underline;
 }
 
 .article__error {
@@ -204,6 +206,7 @@
 
 .sort-widget {
   display: flex;
+  box-sizing: border-box;
   justify-content: flex-end;
   margin: 10px;
 }

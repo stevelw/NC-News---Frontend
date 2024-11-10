@@ -51,7 +51,7 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
         <HeaderElement />
       </div>
       <div className="article">
-        <p className="article__navigation" onClick={() => navigate(-1)}>
+        <p className="navigation-button" onClick={() => navigate(-1)}>
           Back
         </p>
         {isError && (

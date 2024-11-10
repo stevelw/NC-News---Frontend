@@ -13,7 +13,7 @@ export default function Topic({ topics, isTopicsLoading, isTopicsError }) {
       <div className="hiddenOnSmallScreen">
         <HeaderElement />
       </div>
-      <p style={{ textDecoration: "underline" }} onClick={() => navigate(-1)}>
+      <p className="navigation-button" onClick={() => navigate(-1)}>
         Back
       </p>
       {isTopicsError && (
