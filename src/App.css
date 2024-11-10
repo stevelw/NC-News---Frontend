@@ -287,35 +287,3 @@
   background-color: transparent;
   color: red;
 }
-
-/* Old to import */
-
-* {
-  color: #223f55;
-  background: #f8f9f9;
-  box-sizing: border-box;
-}
-
-h1 {
-  background: transparent;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-a {
-  text-decoration: none;
-}
-
-.hiddenOnSmallScreen {
-  display: none;
-}
-
-.error {
-  background-color: transparent;
-  color: red;
-}
-
-*/
