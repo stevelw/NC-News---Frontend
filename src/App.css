@@ -179,6 +179,9 @@ a:visited {
 /* Comment composer */
 
 .comment-composer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   box-sizing: border-box;
   color: #223f55;
   grid-area: comment;
