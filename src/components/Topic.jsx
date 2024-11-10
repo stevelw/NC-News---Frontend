@@ -10,7 +10,7 @@ export default function Topic({ topics, isTopicsLoading, isTopicsError }) {
 
   return (
     <>
-      <div className="hiddenOnSmallScreen">
+      <div className="header--small-screen-hidden">
         <HeaderElement />
       </div>
       <p className="navigation-button" onClick={() => navigate(-1)}>
