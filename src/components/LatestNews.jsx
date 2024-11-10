@@ -1,4 +1,3 @@
-import Center from "../styles/Center";
 import ArticleList from "./ArticleList";
 import HeaderElement from "./HeaderElement";
 import TopicList from "./TopicList";
@@ -8,9 +7,7 @@ export default function LatestNews({ topics, isTopicsLoading, isTopicsError }) {
   return (
     <>
       <HeaderElement />
-      <Center>
-        <h2>Latest News</h2>
-      </Center>
+      <h2 className="heading heading--center">Latest News</h2>
       <Columns_2_1>
         <ArticleList
           topics={topics}

@@ -24,6 +24,17 @@
   text-decoration: underline;
 }
 
+/* Heading */
+
+.heading {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.heading--center {
+  justify-content: center;
+}
+
 /* Article */
 
 .article {
