@@ -32,11 +32,11 @@ export default function CommentComposer({ setComments, setIsError }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ gridArea: "comment" }}>
+    <form onSubmit={handleSubmit} className="comment-composer">
       <button
         type="submit"
         disabled={!commentInput}
-        className="leave-a-comment-button"
+        className="comment-composer__button"
       >
         Leave a comment
       </button>
@@ -47,7 +47,7 @@ export default function CommentComposer({ setComments, setIsError }) {
         id="comment-input"
         value={commentInput}
         onChange={({ target: { value } }) => setCommentInput(value)}
-        className="comment-input"
+        className="comment-composer__input"
       ></textarea>
     </form>
   );

@@ -16,19 +16,10 @@ export default function ArticleCard({
 }) {
   const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
   const articleUrl = "/articles/" + urlFriendlyTitle + "-" + article_id;
-  const style = {
-    maxWidth: "45%",
-  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        margin: "10px",
-      }}
-    >
-      <div style={style}>
+    <div className="article-card">
+      <div className="article-card__section">
         <Link to={articleUrl}>
           <h3>{title}</h3>
         </Link>
@@ -45,7 +36,11 @@ export default function ArticleCard({
         </p>
         <p>&#128077; {votes}</p>
       </div>
-      <img style={style} src={article_img_url} alt="" />
+      <img
+        className="article-card__section article-card__image"
+        src={article_img_url}
+        alt=""
+      />
     </div>
   );
 }

@@ -5,15 +5,15 @@ import TopicList from "./TopicList";
 import ArticleList from "./ArticleList";
 
 export default function Topic({ topics, isTopicsLoading, isTopicsError }) {
-  const topicSlug = useParams().topicSlug;
+  const { topicSlug } = useParams();
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="hiddenOnSmallScreen">
+      <div className="header--small-screen-hidden">
         <HeaderElement />
       </div>
-      <p style={{ textDecoration: "underline" }} onClick={() => navigate(-1)}>
+      <p className="navigation-button" onClick={() => navigate(-1)}>
         Back
       </p>
       {isTopicsError && (

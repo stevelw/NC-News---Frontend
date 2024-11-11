@@ -1,23 +1,65 @@
-* {
-  color: #223f55;
-  background: #f8f9f9;
-  box-sizing: border-box;
-}
+/* Body */
 
-h1 {
-  background: transparent;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+body {
+  background-color: #f8f9f9;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 a {
   text-decoration: none;
+  color: #223f55;
 }
 
-.columns-2-1 {
+a:hover,
+a:visited:hover {
+  text-decoration: underline;
+  color: #af3800;
+}
+
+a:visited {
+  color: #6c91bf;
+}
+
+/* Header */
+
+.header {
+  box-sizing: border-box;
+  color: #223f55;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header--small-screen-hidden {
+  display: none;
+}
+
+@media (min-width: 850px) {
+  .header--small-screen-hidden {
+    display: block;
+  }
+}
+
+/* Navigation button */
+
+.navigation-button {
+  text-decoration: underline;
+}
+
+/* Heading */
+
+.heading {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.heading--center {
+  justify-content: center;
+}
+
+/* Latest News */
+
+.latest-news-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
@@ -27,7 +69,20 @@ a {
     "grid3";
 }
 
-.article-grid {
+@media (min-width: 850px) {
+  .latest-news-grid {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "grid1 grid3"
+      "grid2 .";
+  }
+}
+
+/* Article */
+
+.article {
+  box-sizing: border-box;
+  color: #223f55;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
@@ -42,30 +97,12 @@ a {
     ".                .             author"
     "vote-widget      comment       comment"
     "comment-list     comment-list  comment-list";
-}
-
-.hiddenOnSmallScreen {
-  display: none;
-}
-
-.hiddenOnLargeScreen {
-  display: block;
+  max-width: 800px;
+  margin: auto;
 }
 
 @media (min-width: 850px) {
-  .hiddenOnSmallScreen {
-    display: block;
-  }
-  .hiddenOnLargeScreen {
-    display: none;
-  }
-  .columns-2-1 {
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas:
-      "grid1 grid3"
-      "grid2 .";
-  }
-  .article-grid {
+  .article {
     grid-template-columns: 3fr 3fr 1fr 3fr 1fr;
     grid-template-areas:
       "top-left-button  .         image         image         image"
@@ -78,109 +115,219 @@ a {
   }
 }
 
-.commentCard .commentCard-disabled {
+.article__error {
+  grid-area: body;
+}
+
+.article__headline {
+  grid-area: headline;
+}
+
+.article__topic {
+  grid-area: topic;
+  text-align: right;
+}
+
+.article__timestamp {
+  grid-area: timestamp;
+  text-align: right;
+}
+
+.article__image {
+  grid-area: image;
+  max-width: 100%;
+  height: auto;
+}
+
+.article__body {
+  grid-area: body;
+}
+
+.article__author {
+  grid-area: author;
+  text-align: right;
+}
+
+/* Article list */
+
+.article-list {
+  box-sizing: border-box;
+  color: #223f55;
+  grid-area: grid1;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Article card */
+
+.article-card {
+  box-sizing: border-box;
+  color: #223f55;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.article-card__section {
+  max-width: 45%;
+}
+
+.article-card__image {
+  height: auto;
+}
+
+/* Comment composer */
+
+.comment-composer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  box-sizing: border-box;
+  color: #223f55;
+  grid-area: comment;
+  width: 100%;
+  margin: 5px;
+}
+
+.comment-composer__button {
+  height: 4em;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+}
+
+.comment-composer__button:hover {
+  background-color: #6c91bf;
+}
+
+.comment-composer__input {
+  height: 5em;
+}
+
+/* Comment list */
+
+.comment-list {
+  grid-area: comment-list;
+}
+
+/* Comment card */
+
+.comment-card {
+  box-sizing: border-box;
   padding: 5px 10px;
   margin: 5px 0;
-}
-
-.commentCard {
   background-color: #223f55;
-}
-
-.commentCard * {
   color: #f8f9f9;
 }
 
-.commentCard-disabled {
-  background-color: #697d8c;
+.comment-card--disabled {
+  background-color: #6c91bf;
+  color: #f8f9f9;
 }
 
-.commentCard-disabled::before {
+.comment-card--disabled::before {
   content: "Deleting...";
 }
 
-.commentCard-disabled * {
-  color: #b1bbc2;
+.comment-card__button {
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
 }
 
-.commentCard-disabled button {
+.comment-card--disabled .comment-card__button {
   visibility: hidden;
 }
 
-.comment {
+.comment-card__comment {
   background-color: transparent;
 }
 
-.error {
-  background-color: transparent;
-  color: red;
-}
-
-.author {
+.comment-card__author {
   background-color: transparent;
   text-align: right;
 }
 
-.timestamp {
+.comment-card__timestamp {
   background-color: transparent;
   text-align: right;
   font-style: italic;
 }
 
-.button-delete {
-  background-color: red;
-  color: white;
-  border: none;
+.comment-card__error {
+  background-color: transparent;
+  color: red;
 }
 
-.widget-sort {
+/* Load button */
+
+.load-button {
+  box-sizing: border-box;
+  grid-area: grid2;
+}
+
+/* Sorting widget */
+
+.sort-widget {
   display: flex;
+  box-sizing: border-box;
   justify-content: flex-end;
   margin: 10px;
 }
 
-.widget-sort p {
+.sort-widget__label {
   margin: 0 5px;
 }
 
-.widget-sort button {
+.sort-widget__option {
   border: none;
   background-color: #223f55;
   color: #f8f9f9;
 }
 
-.widget-sort .selected {
-  border: none;
-  background-color: #697d8c;
-  color: #b1bbc2;
+.sort-widget__option--selected {
+  background-color: #af3800;
 }
 
-.widget-vote {
+/* Topic list */
+
+.topic-list {
+  grid-area: grid3;
+  box-sizing: border-box;
+}
+
+.topic-list__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Vote widget */
+
+.vote-widget {
   display: flex;
   gap: 5px;
+  box-sizing: border-box;
+  grid-area: vote-widget;
 }
 
-.widget-vote button {
+.vote-widget__button {
   margin: 10px;
   padding: 0;
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
 }
 
-.widget-vote .error {
+.vote-widget__button:hover {
+  background-color: #6c91bf;
+}
+
+.vote-widget--error {
   padding: 10px 0;
-}
-
-form * {
-  width: 100%;
-  margin: 5px;
-}
-
-.leave-a-comment-button {
-  height: 4em;
-}
-
-.comment-input {
-  height: 5em;
+  background-color: transparent;
+  color: red;
 }

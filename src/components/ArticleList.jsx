@@ -48,11 +48,7 @@ export default function ArticleList({
       {isLoading && !isError ? (
         <p>Loading...</p>
       ) : (
-        <div
-          style={{
-            gridArea: "grid1",
-          }}
-        >
+        <div className="article-list">
           <Sorting
             sortBy={sortBy}
             setSortBy={setSortBy}

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import ErrorComponent from "./ErrorComponent";
 
 export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
   return (
-    <div style={{ gridArea: "grid3" }}>
+    <div className="topic-list">
       <h2>Topics</h2>
       {isTopicsError ? (
         <ErrorComponent
@@ -14,7 +15,7 @@ export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
       {isTopicsLoading && !isTopicsError ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className="topic-list__list">
           {Object.keys(topics).map((slug) => {
             return (
               <li key={slug}>
