@@ -60,7 +60,7 @@ export default function CommentList({
                   "comment-card" + (disabled ? " comment-card--disabled" : "")
                 }
               >
-                {user.username === author && (
+                {user.username === author && comment_id && (
                   <button
                     onClick={() => handleDeleteComment(comment_id)}
                     className="comment-card__button"
