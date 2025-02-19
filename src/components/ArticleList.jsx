@@ -19,10 +19,13 @@ export default function ArticleList({
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setSearchParams({
-      sort_by: sortBy,
-      sort_order: isSortDesc ? "DESC" : "ASC",
-    });
+    setSearchParams(
+      {
+        sort_by: sortBy,
+        sort_order: isSortDesc ? "DESC" : "ASC",
+      },
+      { replace: true }
+    );
     setIsLoading(true);
     setIsError(false);
     getArticles(sortBy, isSortDesc ? "DESC" : "ASC")
