@@ -62,7 +62,7 @@ export function getArticle(articleId) {
     });
 }
 
-export function incrementVotes(articleId) {
+export function incrementArticleVotes(articleId) {
   return network
     .patch(`/articles/${articleId}`, {
       inc_votes: 1,

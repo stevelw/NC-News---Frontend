@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
-import { getArticle, getComments } from "../utils/api";
+import { getArticle, getComments, incrementArticleVotes } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
@@ -99,7 +99,10 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
             />
             <p className="article__body">{article.body}</p>
             <p className="article__author">{article.author}</p>
-            <Vote />
+            <Vote
+              initialVotes={article.votes}
+              incrementVotes={() => incrementArticleVotes(articleId)}
+            />
             <CommentComposer
               setComments={setComments}
               setIsCommentReloading={setIsCommentReloading}
