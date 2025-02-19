@@ -173,7 +173,7 @@ a:visited {
 }
 
 .article-card__image {
-  height: auto;
+  height: 100%;
 }
 
 /* Comment composer */
