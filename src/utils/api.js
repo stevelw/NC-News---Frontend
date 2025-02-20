@@ -85,6 +85,17 @@ export function getComments(articleId) {
     });
 }
 
+export function incrementCommentVotes(commentId) {
+  return network
+    .patch(`/comments/${commentId}`, {
+      inc_votes: 1,
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}
+
 export function postComment(article_id, comment, username) {
   return network
     .post(`/articles/${article_id}/comments`, {
