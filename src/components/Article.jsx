@@ -15,6 +15,7 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   const [comments, setComments] = useState([]);
   const [isCommentLoading, setIsCommentLoading] = useState(true);
   const [isCommentError, setIsCommentError] = useState(false);
+  const [isCommentReloading, setIsCommentReloading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +33,11 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   }, []);
 
   useEffect(() => {
-    setIsCommentLoading(true);
+    if (isCommentReloading) {
+      setIsCommentReloading(false);
+    } else {
+      setIsCommentLoading(true);
+    }
     setIsCommentError(false);
 
     getComments(articleId)
@@ -43,7 +48,7 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
       .catch((err) => {
         setIsCommentError(true);
       });
-  }, []);
+  }, [isCommentReloading]);
 
   return (
     <>
@@ -98,6 +103,7 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
             <CommentComposer
               setComments={setComments}
               setIsError={setIsCommentError}
+              setIsCommentReloading={setIsCommentReloading}
             />
             <CommentList
               comments={comments}
