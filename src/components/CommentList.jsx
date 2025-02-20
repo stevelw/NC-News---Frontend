@@ -49,7 +49,15 @@ export default function CommentList({
         <p>Loading...</p>
       ) : comments.length ? (
         comments.map(
-          ({ comment_id, created_at, author, body, disabled, error }) => {
+          ({
+            comment_id,
+            created_at,
+            author,
+            body,
+            votes,
+            disabled,
+            error,
+          }) => {
             return (
               <Comment
                 key={comment_id ?? Symbol.for(body+author+created_at)}
@@ -57,6 +65,7 @@ export default function CommentList({
                 commentBody={body}
                 author={author}
                 created_at={created_at}
+                initialVotes={votes}
                 handleDeleteComment={() => handleDeleteComment(comment_id)}
                 disabled={disabled}
                 error={error}
