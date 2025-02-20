@@ -102,7 +102,6 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
             <Vote />
             <CommentComposer
               setComments={setComments}
-              setIsError={setIsCommentError}
               setIsCommentReloading={setIsCommentReloading}
             />
             <CommentList

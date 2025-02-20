@@ -2,15 +2,13 @@ import { useContext, useState } from "react";
 import { postComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import ErrorComponent from "./ErrorComponent";
 
-export default function CommentComposer({
-  setComments,
-  setIsError,
-  setIsCommentReloading,
-}) {
+export default function CommentComposer({ setComments, setIsCommentReloading }) {
   const { user } = useContext(UserContext);
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [commentInput, setCommentInput] = useState("");
+  const [isErrorPosting, setIsErrorPosting] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -29,31 +27,37 @@ export default function CommentComposer({
       .then(() => {
         setCommentInput("");
         setIsCommentReloading(true);
+        setIsErrorPosting(false);
       })
-      .catch((err) => {
-        setIsError(true);
+      .catch(() => {
+        setIsErrorPosting(true);
         setComments((currentComments) => currentComments.slice(1));
       });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="comment-composer">
-      <button
-        type="submit"
-        disabled={!commentInput}
-        className="comment-composer__button"
-      >
-        Leave a comment
-      </button>
-      <label hidden htmlFor="comment-input">
-        Comment
-      </label>
-      <textarea
-        id="comment-input"
-        value={commentInput}
-        onChange={({ target: { value } }) => setCommentInput(value)}
-        className="comment-composer__input"
-      ></textarea>
-    </form>
+    <div className="comment-composer">
+      <form onSubmit={handleSubmit}>
+        <button
+          type="submit"
+          disabled={!commentInput}
+          className="comment-composer__button"
+        >
+          Leave a comment
+        </button>
+        <label hidden htmlFor="comment-input">
+          Comment
+        </label>
+        <textarea
+          id="comment-input"
+          value={commentInput}
+          onChange={({ target: { value } }) => setCommentInput(value)}
+          className="comment-composer__input"
+        ></textarea>
+      </form>
+      {isErrorPosting && (
+        <ErrorComponent message="Sorry, we couldn't post that comment right now. Please try again." />
+      )}
+    </div>
   );
 }
