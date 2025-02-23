@@ -254,6 +254,12 @@ a:visited {
   font-style: italic;
 }
 
+.comment-card__lower {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
 .comment-card__error {
   background-color: transparent;
   color: red;

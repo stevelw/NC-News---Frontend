@@ -62,7 +62,7 @@ export function getArticle(articleId) {
     });
 }
 
-export function incrementVotes(articleId) {
+export function incrementArticleVotes(articleId) {
   return network
     .patch(`/articles/${articleId}`, {
       inc_votes: 1,
@@ -81,6 +81,17 @@ export function getComments(articleId) {
     })
     .catch((err) => {
       if (err.status !== 404) console.log(err);
+      throw err;
+    });
+}
+
+export function incrementCommentVotes(commentId) {
+  return network
+    .patch(`/comments/${commentId}`, {
+      inc_votes: 1,
+    })
+    .catch((err) => {
+      console.log(err);
       throw err;
     });
 }

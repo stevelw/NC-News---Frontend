@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import ErrorComponent from "./ErrorComponent";
-import { UserContext } from "../contexts/UserContext";
 import { deleteComment } from "../utils/api";
+import Comment from "./Comment";
 
 export default function CommentList({
   comments,
@@ -9,8 +8,6 @@ export default function CommentList({
   isLoading,
   isError,
 }) {
-  const { user } = useContext(UserContext);
-
   function handleDeleteComment(commentId) {
     setComments((currentComments) => {
       currentComments.find(
@@ -52,29 +49,27 @@ export default function CommentList({
         <p>Loading...</p>
       ) : comments.length ? (
         comments.map(
-          ({ comment_id, created_at, author, body, disabled, error }) => {
+          ({
+            comment_id,
+            created_at,
+            author,
+            body,
+            votes,
+            disabled,
+            error,
+          }) => {
             return (
-              <div
-                key={comment_id ?? Math.random()}
-                className={
-                  "comment-card" + (disabled ? " comment-card--disabled" : "")
-                }
-              >
-                {user.username === author && comment_id && (
-                  <button
-                    onClick={() => handleDeleteComment(comment_id)}
-                    className="comment-card__button"
-                  >
-                    &#x2717;
-                  </button>
-                )}
-                {error && <p className="comment-card__error">{error}</p>}
-                <p className="comment-card__comment">{body}</p>
-                <p className="comment-card__author">{author}</p>
-                <p className="comment-card__timestamp">
-                  {new Date(created_at).toDateString()}
-                </p>
-              </div>
+              <Comment
+                key={comment_id ?? Symbol.for(body+author+created_at)}
+                comment_id={comment_id}
+                commentBody={body}
+                author={author}
+                created_at={created_at}
+                initialVotes={votes}
+                handleDeleteComment={() => handleDeleteComment(comment_id)}
+                disabled={disabled}
+                error={error}
+              />
             );
           }
         )
