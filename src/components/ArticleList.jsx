@@ -5,6 +5,8 @@ import ErrorComponent from "./ErrorComponent";
 import { useSearchParams } from "react-router-dom";
 import Sorting from "./Sorting";
 
+const ARTICLES_PER_PAGE = 3;
+
 export default function ArticleList({
   topics,
   isTopicsLoading,
@@ -17,18 +19,20 @@ export default function ArticleList({
   const [sortBy, setSortBy] = useState("Date");
   const [isSortDesc, setIsSortDesc] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setSearchParams(
       {
         sort_by: sortBy,
         sort_order: isSortDesc ? "DESC" : "ASC",
+        page,
       },
       { replace: true }
     );
     setIsLoading(true);
     setIsError(false);
-    getArticles(sortBy, isSortDesc ? "DESC" : "ASC")
+    getArticles(sortBy, isSortDesc ? "DESC" : "ASC", ARTICLES_PER_PAGE, page)
       .then((articlesReceived) => {
         setArticles(articlesReceived);
         setIsLoading(false);
