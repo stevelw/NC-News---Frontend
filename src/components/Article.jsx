@@ -1,13 +1,18 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
-import { getArticle, getComments, incrementArticleVotes } from "../utils/api";
+import {
+  getArticle,
+  getComments,
+  incrementArticleVotes,
+  getTopics,
+} from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
 import CommentComposer from "./CommentComposer";
 
-export default function Article({ topics, isTopicsLoading, isTopicsError }) {
+export default function Article() {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState("");
@@ -17,6 +22,27 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   const [isCommentError, setIsCommentError] = useState(false);
   const [isCommentReloading, setIsCommentReloading] = useState(false);
   const navigate = useNavigate();
+  const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+    setIsTopicsLoading(true);
+    setIsTopicsError(false);
+    getTopics()
+      .then((topicsList) => {
+        const topicsLookup = {};
+        topicsList.forEach(({ slug, description }) => {
+          topicsLookup[slug] = description;
+        });
+        setTopics(topicsLookup);
+        setIsTopicsLoading(false);
+      })
+      .catch((err) => {
+        setTopics({});
+        setIsTopicsError(true);
+      });
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
