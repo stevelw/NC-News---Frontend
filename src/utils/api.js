@@ -62,6 +62,21 @@ export function getArticle(articleId) {
     });
 }
 
+export function postArticle(author, title, body, topic, article_img_url) {
+  return network
+    .post(`/articles`, {
+      author,
+      title,
+      body,
+      topic,
+      article_img_url,
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+}
+
 export function incrementArticleVotes(articleId) {
   return network
     .patch(`/articles/${articleId}`, {
