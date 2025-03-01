@@ -3,10 +3,33 @@ import HeaderElement from "./HeaderElement";
 import ErrorComponent from "./ErrorComponent";
 import TopicList from "./TopicList";
 import ArticleList from "./ArticleList";
+import { useEffect, useState } from "react";
+import { getTopics } from "../utils/api";
 
-export default function Topic({ topics, isTopicsLoading, isTopicsError }) {
+export default function Topic() {
   const { topicSlug } = useParams();
   const navigate = useNavigate();
+  const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+    setIsTopicsLoading(true);
+    setIsTopicsError(false);
+    getTopics()
+      .then((topicsList) => {
+        const topicsLookup = {};
+        topicsList.forEach(({ slug, description }) => {
+          topicsLookup[slug] = description;
+        });
+        setTopics(topicsLookup);
+        setIsTopicsLoading(false);
+      })
+      .catch((err) => {
+        setTopics({});
+        setIsTopicsError(true);
+      });
+  }, []);
 
   return (
     <>

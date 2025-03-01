@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { getTopics } from "../utils/api";
+import { useEffect, useState } from "react";
 
 export default function ArticleCard({
   article: {
@@ -10,12 +12,30 @@ export default function ArticleCard({
     comment_count,
     votes,
   },
-  topics,
-  isTopicsLoading,
-  isTopicsError,
 }) {
   const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
   const articleUrl = "/articles/" + urlFriendlyTitle + "-" + article_id;
+  const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+    setIsTopicsLoading(true);
+    setIsTopicsError(false);
+    getTopics()
+      .then((topicsList) => {
+        const topicsLookup = {};
+        topicsList.forEach(({ slug, description }) => {
+          topicsLookup[slug] = description;
+        });
+        setTopics(topicsLookup);
+        setIsTopicsLoading(false);
+      })
+      .catch((err) => {
+        setTopics({});
+        setIsTopicsError(true);
+      });
+  }, []);
 
   return (
     <div className="article-card">

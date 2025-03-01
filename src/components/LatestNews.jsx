@@ -2,22 +2,14 @@ import ArticleList from "./ArticleList";
 import HeaderElement from "./HeaderElement";
 import TopicList from "./TopicList";
 
-export default function LatestNews({ topics, isTopicsLoading, isTopicsError }) {
+export default function LatestNews() {
   return (
     <>
       <HeaderElement />
       <h2 className="heading heading--center">Latest News</h2>
       <div className="latest-news-grid">
-        <ArticleList
-          topics={topics}
-          isTopicsLoading={isTopicsLoading}
-          isTopicsError={isTopicsError}
-        />
-        <TopicList
-          topics={topics}
-          isTopicsLoading={isTopicsLoading}
-          isTopicsError={isTopicsError}
-        />
+        <ArticleList />
+        <TopicList />
       </div>
     </>
   );

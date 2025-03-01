@@ -5,12 +5,7 @@ import ErrorComponent from "./ErrorComponent";
 import { useSearchParams } from "react-router-dom";
 import Sorting from "./Sorting";
 
-export default function ArticleList({
-  topics,
-  isTopicsLoading,
-  isTopicsError,
-  filterTopic,
-}) {
+export default function ArticleList({ filterTopic }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -64,15 +59,7 @@ export default function ArticleList({
               return !filterTopic || topic === filterTopic;
             })
             .map((article) => {
-              return (
-                <ArticleCard
-                  key={article.article_id}
-                  article={article}
-                  topics={topics}
-                  isTopicsLoading={isTopicsLoading}
-                  isTopicsError={isTopicsError}
-                />
-              );
+              return <ArticleCard key={article.article_id} article={article} />;
             })}
         </div>
       )}
