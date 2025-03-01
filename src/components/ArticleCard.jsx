@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { getTopics } from "../utils/api";
 import { useEffect, useState } from "react";
+import { pathForArticle } from "../utils/utils";
 
 export default function ArticleCard({
   article: {
@@ -13,8 +14,6 @@ export default function ArticleCard({
     votes,
   },
 }) {
-  const urlFriendlyTitle = title.replaceAll(/[^a-z]/gi, "-");
-  const articleUrl = "/articles/" + urlFriendlyTitle + "-" + article_id;
   const [topics, setTopics] = useState({});
   const [isTopicsLoading, setIsTopicsLoading] = useState(true);
   const [isTopicsError, setIsTopicsError] = useState(false);
@@ -40,7 +39,7 @@ export default function ArticleCard({
   return (
     <div className="article-card">
       <div className="article-card__section">
-        <Link to={articleUrl}>
+        <Link to={pathForArticle(article_id, title)}>
           <h3>{title}</h3>
         </Link>
         {isTopicsError || isTopicsLoading ? (

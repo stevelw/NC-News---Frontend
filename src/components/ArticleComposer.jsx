@@ -2,14 +2,18 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import ErrorComponent from "./ErrorComponent";
 import { postArticle } from "../utils/api";
+import { useNavigate } from "react-router-dom";
+import { pathForArticle } from "../utils/utils";
 
 export default function ArticleComposer() {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [articleTitle, setArticleTitle] = useState("");
   const [isErrorPosting, setIsErrorPosting] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
+    setIsErrorPosting(false);
     postArticle(
       user.username,
       articleTitle,
@@ -17,10 +21,15 @@ export default function ArticleComposer() {
       "cooking",
       "https://commons.wikimedia.org/wiki/File:Blue_Tiles_-_Free_For_Commercial_Use_-_FFCU_(26777905945).jpg"
     )
-      .then(() => {
-        setArticleTitle("");
-        setIsErrorPosting(false);
-      })
+      .then(
+        ({
+          data: {
+            article: { article_id, title },
+          },
+        }) => {
+          navigate(pathForArticle(article_id, title));
+        }
+      )
       .catch(() => {
         setIsErrorPosting(true);
       });
@@ -32,10 +41,15 @@ export default function ArticleComposer() {
         <label hidden htmlFor="title">
           Title
         </label>
-        <input type="text" id="title" name="title" value={articleTitle}
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={articleTitle}
           onChange={({ target: { value } }) => setArticleTitle(value)}
           className="article-composer__title"
-          placeholder="Title" />
+          placeholder="Title"
+        />
         <button
           type="submit"
           disabled={!articleTitle}
