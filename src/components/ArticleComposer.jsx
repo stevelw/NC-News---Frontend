@@ -42,6 +42,7 @@ export default function ArticleComposer() {
           Title
         </label>
         <input
+          autoFocus
           type="text"
           id="title"
           name="title"
