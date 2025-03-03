@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import ErrorComponent from "./ErrorComponent";
 import { postArticle } from "../utils/api";
@@ -8,15 +8,29 @@ import { pathForArticle } from "../utils/utils";
 export default function ArticleComposer() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const [articleTitle, setArticleTitle] = useState("");
+  const [title, setTitle] = useState("");
+  const [isTitleValid, setIsTitleValid] = useState(false);
+  const [isShowErrorTitle, setIsShowErrorTitle] = useState(false);
   const [isErrorPosting, setIsErrorPosting] = useState(false);
+
+  useEffect(() => {
+    setIsTitleValid(() => {
+      if (title.length >= 1 && title.length <= 64) {
+        setIsShowErrorTitle(false);
+        return true;
+      } else {
+        if (title) setIsShowErrorTitle(true);
+        return false;
+      }
+    });
+  }, [title]);
 
   function handleSubmit(event) {
     event.preventDefault();
     setIsErrorPosting(false);
     postArticle(
       user.username,
-      articleTitle,
+      title,
       "articleBody",
       "cooking",
       "https://commons.wikimedia.org/wiki/File:Blue_Tiles_-_Free_For_Commercial_Use_-_FFCU_(26777905945).jpg"
@@ -46,14 +60,20 @@ export default function ArticleComposer() {
           type="text"
           id="title"
           name="title"
-          value={articleTitle}
-          onChange={({ target: { value } }) => setArticleTitle(value)}
+          value={title}
+          onChange={({ target: { value } }) => setTitle(value)}
           className="article-composer__title"
           placeholder="Title"
         />
+        {isShowErrorTitle && (
+          <ErrorComponent
+            message="Title must be between 1 and 64 characters."
+            isHeadinghidden={true}
+          />
+        )}
         <button
           type="submit"
-          disabled={!articleTitle}
+          disabled={!isTitleValid}
           className="article-composer__button"
         >
           Create article

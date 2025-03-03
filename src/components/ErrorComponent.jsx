@@ -1,7 +1,7 @@
-export default function ErrorComponent({ message }) {
+export default function ErrorComponent({ message, isHeadingHidden = false }) {
   return (
     <div>
-      <h1>Error</h1>
+      {!isHeadingHidden && <h1>Error</h1>}
       <p>{message}</p>
     </div>
   );
