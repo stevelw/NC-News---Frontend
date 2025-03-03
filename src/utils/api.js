@@ -77,6 +77,13 @@ export function postArticle(author, title, body, topic, article_img_url) {
     });
 }
 
+export function deleteArticle(article_id) {
+  return network.delete(`/articles/${article_id}`).catch((err) => {
+    console.log(err);
+    throw err;
+  });
+}
+
 export function incrementArticleVotes(articleId) {
   return network
     .patch(`/articles/${articleId}`, {
