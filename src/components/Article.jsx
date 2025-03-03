@@ -2,10 +2,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
 import { getArticle, getComments, incrementArticleVotes } from "../utils/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
 import CommentComposer from "./CommentComposer";
+import { deleteArticle } from "../utils/api";
 
 export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
@@ -17,6 +19,8 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   const [isCommentError, setIsCommentError] = useState(false);
   const [isCommentReloading, setIsCommentReloading] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,7 +34,7 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
       .catch((err) => {
         err.status === 404 ? setIsError("404") : setIsError("unhandled");
       });
-  }, []);
+  }, [articleId]);
 
   useEffect(() => {
     if (isCommentReloading) {
@@ -48,7 +52,19 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
       .catch((err) => {
         setIsCommentError(true);
       });
-  }, [isCommentReloading]);
+  }, [isCommentReloading, articleId]);
+
+  function handleDeleteArticle() {
+    setIsDeleting(true);
+    deleteArticle(articleId)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        err.status === 404 ? setIsError("404") : setIsError("unhandled");
+        setIsDeleting(false);
+      });
+  }
 
   return (
     <>
@@ -65,7 +81,7 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
               message={
                 isError === "404"
                   ? "Sorry, that article doesn't exist."
-                  : "Error loading article. Check your network connection and try again"
+                  : "Sorry, that didn't work. Check your network connection and try again."
               }
             />
           </div>
@@ -97,6 +113,15 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
               }
               alt=""
             />
+            {user.username === article.author && (
+              <button
+                onClick={handleDeleteArticle}
+                className=""
+                disabled={isDeleting}
+              >
+                Delete article
+              </button>
+            )}
             <p className="article__body">{article.body}</p>
             <p className="article__author">{article.author}</p>
             <Vote
