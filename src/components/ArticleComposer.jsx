@@ -14,6 +14,9 @@ export default function ArticleComposer() {
   const [body, setBody] = useState("");
   const [isBodyValid, setIsBodyValid] = useState(false);
   const [isShowErrorBody, setIsShowErrorBody] = useState(false);
+  const [imageURL, setImageURL] = useState("");
+  const [isImageURLValid, setIsImageURLValid] = useState(false);
+  const [isShowErrorImageURL, setIsShowErrorImageURL] = useState(false);
   const [isErrorPosting, setIsErrorPosting] = useState(false);
 
   useEffect(() => {
@@ -40,6 +43,22 @@ export default function ArticleComposer() {
     });
   }, [body]);
 
+  useEffect(() => {
+    setIsImageURLValid(() => {
+      if (
+        imageURL.match(
+          /^(https?:\/\/)?[a-z0-9\-\_]+(\.[a-z0-9\-\_]+)*(\.[a-z0-9]+)(\/[a-z0-9\-\_]+)*\/[a-z0-9\-\_]+\.(png|jpeg|jpg)$/i
+        )
+      ) {
+        setIsShowErrorImageURL(false);
+        return true;
+      } else {
+        if (imageURL) setIsShowErrorImageURL(true);
+        return false;
+      }
+    });
+  }, [imageURL]);
+
   function handleSubmit(event) {
     event.preventDefault();
     setIsErrorPosting(false);
@@ -48,7 +67,7 @@ export default function ArticleComposer() {
       title,
       body,
       "cooking",
-      "https://commons.wikimedia.org/wiki/File:Blue_Tiles_-_Free_For_Commercial_Use_-_FFCU_(26777905945).jpg"
+      imageURL === "" ? undefined : imageURL
     )
       .then(
         ({
@@ -105,9 +124,28 @@ export default function ArticleComposer() {
             />
           )}
         </div>
+        <div className="article-composer__image-url">
+          <label hidden htmlFor="image-url">
+            URL for image
+          </label>
+          <input
+            id="image-url"
+            type="text"
+            name="image-url"
+            value={imageURL}
+            onChange={({ target: { value } }) => setImageURL(value)}
+            placeholder="Optional URL for image"
+          />
+          {isShowErrorImageURL && (
+            <ErrorComponent
+              message="The URL must be a valid PNG or JPEG file."
+              isHeadinghidden={true}
+            />
+          )}
+        </div>
         <button
           type="submit"
-          disabled={!isTitleValid || !isBodyValid}
+          disabled={!isTitleValid || !isBodyValid || !isImageURLValid}
           className="article-composer__button"
         >
           Create article
