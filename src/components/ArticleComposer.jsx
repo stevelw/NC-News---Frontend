@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import ErrorComponent from "./ErrorComponent";
-import { postArticle } from "../utils/api";
+import { postArticle, getTopics } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import { pathForArticle } from "../utils/utils";
 
@@ -18,6 +18,24 @@ export default function ArticleComposer() {
   const [isImageURLValid, setIsImageURLValid] = useState(false);
   const [isShowErrorImageURL, setIsShowErrorImageURL] = useState(false);
   const [isErrorPosting, setIsErrorPosting] = useState(false);
+  const [topic, setTopic] = useState("");
+  const [topics, setTopics] = useState([]);
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+    setIsTopicsLoading(true);
+    setIsTopicsError(false);
+    getTopics()
+      .then((topicsList) => {
+        setTopics(topicsList);
+        setIsTopicsLoading(false);
+      })
+      .catch(() => {
+        setTopics([]);
+        setIsTopicsError(true);
+      });
+  }, []);
 
   useEffect(() => {
     setIsTitleValid(() => {
@@ -66,7 +84,7 @@ export default function ArticleComposer() {
       user.username,
       title,
       body,
-      "cooking",
+      topic,
       imageURL === "" ? undefined : imageURL
     )
       .then(
@@ -143,9 +161,42 @@ export default function ArticleComposer() {
             />
           )}
         </div>
+        {isTopicsLoading ? (
+          <p>Loading topics...</p>
+        ) : isTopicsError ? (
+          <ErrorComponent message="Sorry, we're having problems. Check your internet connection and try again." isHeadingHidden={true} />
+        ) : (
+          <label className="article-composer__topic">
+            <select
+              name="topic"
+              id="topic"
+              value={topic}
+              onChange={({ target: { value } }) => {
+                setTopic(value);
+              }}
+            >
+              <option value=""></option>
+              {topics.map(({ slug, description }) => {
+                return (
+                  <option key={slug} value={slug}>
+                    {description}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+        )}
         <button
           type="submit"
-          disabled={!isTitleValid || !isBodyValid || !isImageURLValid}
+          disabled={
+            !(
+              isTitleValid &&
+              isBodyValid &&
+              (imageURL === "" || isImageURLValid) &&
+              !isTopicsLoading &&
+              topic
+            )
+          }
           className="article-composer__button"
         >
           Create article
