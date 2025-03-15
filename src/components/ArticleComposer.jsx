@@ -161,31 +161,33 @@ export default function ArticleComposer() {
             />
           )}
         </div>
-        {isTopicsLoading ? (
-          <p>Loading topics...</p>
-        ) : isTopicsError ? (
-          <ErrorComponent message="Sorry, we're having problems. Check your internet connection and try again." isHeadingHidden={true} />
-        ) : (
-          <label className="article-composer__topic">
-            <select
-              name="topic"
-              id="topic"
-              value={topic}
-              onChange={({ target: { value } }) => {
-                setTopic(value);
-              }}
-            >
-              <option value=""></option>
-              {topics.map(({ slug, description }) => {
-                return (
-                  <option key={slug} value={slug}>
-                    {description}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-        )}
+        <div className="article-composer__topic">
+          {isTopicsLoading ? (
+            <p>Loading topics...</p>
+          ) : isTopicsError ? (
+            <ErrorComponent message="Sorry, we're having problems. Check your internet connection and try again." isHeadingHidden={true} />
+          ) : (
+            <label>
+              <select
+                name="topic"
+                id="topic"
+                value={topic}
+                onChange={({ target: { value } }) => {
+                  setTopic(value);
+                }}
+              >
+                <option value=""></option>
+                {topics.map(({ slug, description }) => {
+                  return (
+                    <option key={slug} value={slug}>
+                      {description}
+                    </option>
+                  );
+                })}
+              </select>
+            </label>
+          )}
+        </div>
         <button
           type="submit"
           disabled={
