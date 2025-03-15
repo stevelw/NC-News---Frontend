@@ -4,6 +4,7 @@ import ErrorComponent from "./ErrorComponent";
 import { postArticle, getTopics } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import { pathForArticle } from "../utils/utils";
+import HeaderElement from "./HeaderElement";
 
 export default function ArticleComposer() {
   const navigate = useNavigate();
@@ -102,111 +103,117 @@ export default function ArticleComposer() {
   }
 
   return (
-    <div className="article-composer">
-      <form onSubmit={handleSubmit}>
-        <div className="article-composer__title">
-          <label hidden htmlFor="title">
-            Title
-          </label>
-          <input
-            autoFocus
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={({ target: { value } }) => setTitle(value)}
-            placeholder="Title"
-          />
-          {isShowErrorTitle && (
-            <ErrorComponent
-              message="Title must be between 1 and 64 characters."
-              isHeadinghidden={true}
-            />
-          )}
-        </div>
-        <div className="article-composer__body">
-          <label hidden htmlFor="body">
-            Article text
-          </label>
-          <textarea
-            id="body"
-            name="body"
-            value={body}
-            onChange={({ target: { value } }) => setBody(value)}
-            placeholder="Article text"
-          />
-          {isShowErrorBody && (
-            <ErrorComponent
-              message="The article text must be at least 1 character long."
-              isHeadinghidden={true}
-            />
-          )}
-        </div>
-        <div className="article-composer__image-url">
-          <label hidden htmlFor="image-url">
-            URL for image
-          </label>
-          <input
-            id="image-url"
-            type="text"
-            name="image-url"
-            value={imageURL}
-            onChange={({ target: { value } }) => setImageURL(value)}
-            placeholder="Optional URL for image"
-          />
-          {isShowErrorImageURL && (
-            <ErrorComponent
-              message="The URL must be a valid PNG or JPEG file."
-              isHeadinghidden={true}
-            />
-          )}
-        </div>
-        <div className="article-composer__topic">
-          {isTopicsLoading ? (
-            <p>Loading topics...</p>
-          ) : isTopicsError ? (
-            <ErrorComponent message="Sorry, we're having problems. Check your internet connection and try again." isHeadingHidden={true} />
-          ) : (
-            <label>
-              <select
-                name="topic"
-                id="topic"
-                value={topic}
-                onChange={({ target: { value } }) => {
-                  setTopic(value);
-                }}
-              >
-                <option value=""></option>
-                {topics.map(({ slug, description }) => {
-                  return (
-                    <option key={slug} value={slug}>
-                      {description}
-                    </option>
-                  );
-                })}
-              </select>
+    <>
+      <div className="header header--small-screen-hidden">
+        <HeaderElement />
+      </div>
+
+      <div className="article-composer">
+        <form onSubmit={handleSubmit}>
+          <div className="article-composer__title">
+            <label hidden htmlFor="title">
+              Title
             </label>
-          )}
-        </div>
-        <button
-          type="submit"
-          disabled={
-            !(
-              isTitleValid &&
-              isBodyValid &&
-              (imageURL === "" || isImageURLValid) &&
-              !isTopicsLoading &&
-              topic
-            )
-          }
-          className="article-composer__button"
-        >
-          Create article
-        </button>
-      </form>
-      {isErrorPosting && (
-        <ErrorComponent message="Sorry, we couldn't post that right now. Please try again." />
-      )}
-    </div>
+            <input
+              autoFocus
+              type="text"
+              id="title"
+              name="title"
+              value={title}
+              onChange={({ target: { value } }) => setTitle(value)}
+              placeholder="Title"
+            />
+            {isShowErrorTitle && (
+              <ErrorComponent
+                message="Title must be between 1 and 64 characters."
+                isHeadinghidden={true}
+              />
+            )}
+          </div>
+          <div className="article-composer__body">
+            <label hidden htmlFor="body">
+              Article text
+            </label>
+            <textarea
+              id="body"
+              name="body"
+              value={body}
+              onChange={({ target: { value } }) => setBody(value)}
+              placeholder="Article text"
+            />
+            {isShowErrorBody && (
+              <ErrorComponent
+                message="The article text must be at least 1 character long."
+                isHeadinghidden={true}
+              />
+            )}
+          </div>
+          <div className="article-composer__image-url">
+            <label hidden htmlFor="image-url">
+              URL for image
+            </label>
+            <input
+              id="image-url"
+              type="text"
+              name="image-url"
+              value={imageURL}
+              onChange={({ target: { value } }) => setImageURL(value)}
+              placeholder="Optional URL for image"
+            />
+            {isShowErrorImageURL && (
+              <ErrorComponent
+                message="The URL must be a valid PNG or JPEG file."
+                isHeadinghidden={true}
+              />
+            )}
+          </div>
+          <div className="article-composer__topic">
+            {isTopicsLoading ? (
+              <p>Loading topics...</p>
+            ) : isTopicsError ? (
+              <ErrorComponent message="Sorry, we're having problems. Check your internet connection and try again." isHeadingHidden={true} />
+            ) : (
+              <label>
+                <select
+                  name="topic"
+                  id="topic"
+                  value={topic}
+                  onChange={({ target: { value } }) => {
+                    setTopic(value);
+                  }}
+                >
+                  <option value=""></option>
+                  {topics.map(({ slug, description }) => {
+                    return (
+                      <option key={slug} value={slug}>
+                        {description}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            )}
+          </div>
+          <button
+            type="submit"
+            disabled={
+              !(
+                isTitleValid &&
+                isBodyValid &&
+                (imageURL === "" || isImageURLValid) &&
+                !isTopicsLoading &&
+                topic
+              )
+            }
+            className="article-composer__button"
+          >
+            Create article
+          </button>
+        </form>
+        {isErrorPosting && (
+          <ErrorComponent message="Sorry, we couldn't post that right now. Please try again." />
+        )}
+      </div>
+    </>
   );
 }
