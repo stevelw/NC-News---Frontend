@@ -107,7 +107,9 @@ export default function ArticleComposer() {
       <div className="header header--small-screen-hidden">
         <HeaderElement />
       </div>
-
+      <p className="navigation-button" onClick={() => navigate(-1)}>
+        Back
+      </p>
       <div className="article-composer">
         <form onSubmit={handleSubmit}>
           <div className="article-composer__title">
