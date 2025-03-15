@@ -34,6 +34,20 @@ a:visited {
   display: none;
 }
 
+.header__report-button {
+  float: right;
+  height: 2.5em;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+  margin: 5px;
+}
+
+.header__report-button:hover,
+.header__report-button:disabled {
+  background-color: #6c91bf;
+}
+
 @media (min-width: 850px) {
   .header--small-screen-hidden {
     display: block;
