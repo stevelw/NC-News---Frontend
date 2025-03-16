@@ -196,7 +196,8 @@ a:visited {
   border: none;
 }
 
-.comment-composer__button:hover {
+.comment-composer__button:hover,
+.comment-composer__button:disabled {
   background-color: #6c91bf;
 }
 
