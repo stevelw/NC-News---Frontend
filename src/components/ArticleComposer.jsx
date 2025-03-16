@@ -9,16 +9,20 @@ import HeaderElement from "./HeaderElement";
 export default function ArticleComposer() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+  const [isErrorPosting, setIsErrorPosting] = useState(false);
+
   const [title, setTitle] = useState("");
   const [isTitleValid, setIsTitleValid] = useState(false);
   const [isShowErrorTitle, setIsShowErrorTitle] = useState(false);
+
   const [body, setBody] = useState("");
   const [isBodyValid, setIsBodyValid] = useState(false);
   const [isShowErrorBody, setIsShowErrorBody] = useState(false);
+
   const [imageURL, setImageURL] = useState("");
   const [isImageURLValid, setIsImageURLValid] = useState(false);
   const [isShowErrorImageURL, setIsShowErrorImageURL] = useState(false);
-  const [isErrorPosting, setIsErrorPosting] = useState(false);
+  
   const [topic, setTopic] = useState("");
   const [topics, setTopics] = useState([]);
   const [isTopicsLoading, setIsTopicsLoading] = useState(true);
