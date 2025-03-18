@@ -34,6 +34,20 @@ a:visited {
   display: none;
 }
 
+.header__report-button {
+  float: right;
+  height: 2.5em;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+  margin: 5px;
+}
+
+.header__report-button:hover,
+.header__report-button:disabled {
+  background-color: #6c91bf;
+}
+
 @media (min-width: 850px) {
   .header--small-screen-hidden {
     display: block;
@@ -174,6 +188,50 @@ a:visited {
 
 .article-card__image {
   height: 100%;
+}
+
+/* Article composer */
+
+.article-composer {
+  box-sizing: border-box;
+  color: #223f55;
+  margin: 5px auto;
+  width: 80%;
+}
+
+.article-composer * {
+  margin: 5px 0;
+}
+
+.article-composer__button {
+  height: 4em;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+}
+
+.article-composer__button:hover,
+.article-composer__button:disabled {
+  background-color: #6c91bf;
+}
+
+.article-composer__title * {
+  height: 1.5em;
+  width: 70%;
+}
+
+.article-composer__body * {
+  height: 15em;
+  width: 100%;
+}
+
+.article-composer__image-url * {
+  height: 1.5em;
+  width: 50%;
+}
+
+.article-composer__topic {
+  height: 1.5em;
 }
 
 /* Comment composer */

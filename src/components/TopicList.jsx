@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
 import ErrorComponent from "./ErrorComponent";
+import { useEffect, useState } from "react";
+import { loadTopicsState } from "../utils/state-loaders";
 
-export default function TopicList({ topics, isTopicsLoading, isTopicsError }) {
+export default function TopicList() {
+  const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+    loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
+  }, []);
+
   return (
     <div className="topic-list">
       <h2>Topics</h2>

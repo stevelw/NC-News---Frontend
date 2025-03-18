@@ -3,10 +3,19 @@ import HeaderElement from "./HeaderElement";
 import ErrorComponent from "./ErrorComponent";
 import TopicList from "./TopicList";
 import ArticleList from "./ArticleList";
+import { useEffect, useState } from "react";
+import { loadTopicsState } from "../utils/state-loaders";
 
-export default function Topic({ topics, isTopicsLoading, isTopicsError }) {
+export default function Topic() {
   const { topicSlug } = useParams();
   const navigate = useNavigate();
+  const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+     loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
+  }, []);
 
   return (
     <>

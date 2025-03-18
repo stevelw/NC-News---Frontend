@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
 import CommentComposer from "./CommentComposer";
+import { loadTopicsState } from "../utils/state-loaders";
 
-export default function Article({ topics, isTopicsLoading, isTopicsError }) {
+export default function Article() {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState("");
@@ -17,6 +18,13 @@ export default function Article({ topics, isTopicsLoading, isTopicsError }) {
   const [isCommentError, setIsCommentError] = useState(false);
   const [isCommentReloading, setIsCommentReloading] = useState(false);
   const navigate = useNavigate();
+  const [topics, setTopics] = useState({});
+  const [isTopicsLoading, setIsTopicsLoading] = useState(true);
+  const [isTopicsError, setIsTopicsError] = useState(false);
+
+  useEffect(() => {
+    loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
