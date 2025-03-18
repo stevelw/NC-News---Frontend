@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import ErrorComponent from "./ErrorComponent";
-import { postArticle, getTopics } from "../utils/api";
+import { postArticle } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import { pathForArticle } from "../utils/utils";
 import HeaderElement from "./HeaderElement";
+import { loadTopicsState } from "../utils/state-loaders";
 
 export default function ArticleComposer() {
   const navigate = useNavigate();
@@ -22,24 +23,14 @@ export default function ArticleComposer() {
   const [imageURL, setImageURL] = useState("");
   const [isImageURLValid, setIsImageURLValid] = useState(false);
   const [isShowErrorImageURL, setIsShowErrorImageURL] = useState(false);
-  
+
   const [topic, setTopic] = useState("");
-  const [topics, setTopics] = useState([]);
+  const [topics, setTopics] = useState({});
   const [isTopicsLoading, setIsTopicsLoading] = useState(true);
   const [isTopicsError, setIsTopicsError] = useState(false);
 
   useEffect(() => {
-    setIsTopicsLoading(true);
-    setIsTopicsError(false);
-    getTopics()
-      .then((topicsList) => {
-        setTopics(topicsList);
-        setIsTopicsLoading(false);
-      })
-      .catch(() => {
-        setTopics([]);
-        setIsTopicsError(true);
-      });
+    loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
   }, []);
 
   useEffect(() => {
@@ -189,10 +180,10 @@ export default function ArticleComposer() {
                   }}
                 >
                   <option value=""></option>
-                  {topics.map(({ slug, description }) => {
+                  {Object.keys(topics).map((slug) => {
                     return (
                       <option key={slug} value={slug}>
-                        {description}
+                        {topics[slug]}
                       </option>
                     );
                   })}

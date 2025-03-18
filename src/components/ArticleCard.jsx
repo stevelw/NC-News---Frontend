@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { getTopics } from "../utils/api";
 import { useEffect, useState } from "react";
 import { pathForArticle } from "../utils/utils";
+import { loadTopicsState } from "../utils/state-loaders";
 
 export default function ArticleCard({
   article: {
@@ -19,21 +19,7 @@ export default function ArticleCard({
   const [isTopicsError, setIsTopicsError] = useState(false);
 
   useEffect(() => {
-    setIsTopicsLoading(true);
-    setIsTopicsError(false);
-    getTopics()
-      .then((topicsList) => {
-        const topicsLookup = {};
-        topicsList.forEach(({ slug, description }) => {
-          topicsLookup[slug] = description;
-        });
-        setTopics(topicsLookup);
-        setIsTopicsLoading(false);
-      })
-      .catch((err) => {
-        setTopics({});
-        setIsTopicsError(true);
-      });
+    loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
   }, []);
 
   return (

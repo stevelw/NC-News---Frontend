@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ErrorComponent from "./ErrorComponent";
-import { getTopics } from "../utils/api";
 import { useEffect, useState } from "react";
+import { loadTopicsState } from "../utils/state-loaders";
 
 export default function TopicList() {
   const [topics, setTopics] = useState({});
@@ -9,21 +9,7 @@ export default function TopicList() {
   const [isTopicsError, setIsTopicsError] = useState(false);
 
   useEffect(() => {
-    setIsTopicsLoading(true);
-    setIsTopicsError(false);
-    getTopics()
-      .then((topicsList) => {
-        const topicsLookup = {};
-        topicsList.forEach(({ slug, description }) => {
-          topicsLookup[slug] = description;
-        });
-        setTopics(topicsLookup);
-        setIsTopicsLoading(false);
-      })
-      .catch(() => {
-        setTopics({});
-        setIsTopicsError(true);
-      });
+    loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
   }, []);
 
   return (

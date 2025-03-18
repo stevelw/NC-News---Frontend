@@ -4,7 +4,7 @@ import ErrorComponent from "./ErrorComponent";
 import TopicList from "./TopicList";
 import ArticleList from "./ArticleList";
 import { useEffect, useState } from "react";
-import { getTopics } from "../utils/api";
+import { loadTopicsState } from "../utils/state-loaders";
 
 export default function Topic() {
   const { topicSlug } = useParams();
@@ -14,21 +14,7 @@ export default function Topic() {
   const [isTopicsError, setIsTopicsError] = useState(false);
 
   useEffect(() => {
-    setIsTopicsLoading(true);
-    setIsTopicsError(false);
-    getTopics()
-      .then((topicsList) => {
-        const topicsLookup = {};
-        topicsList.forEach(({ slug, description }) => {
-          topicsLookup[slug] = description;
-        });
-        setTopics(topicsLookup);
-        setIsTopicsLoading(false);
-      })
-      .catch((err) => {
-        setTopics({});
-        setIsTopicsError(true);
-      });
+     loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
   }, []);
 
   return (

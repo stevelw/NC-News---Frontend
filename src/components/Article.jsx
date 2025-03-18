@@ -1,16 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
-import {
-  getArticle,
-  getComments,
-  incrementArticleVotes,
-  getTopics,
-} from "../utils/api";
+import { getArticle, getComments, incrementArticleVotes } from "../utils/api";
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
 import CommentComposer from "./CommentComposer";
+import { loadTopicsState } from "../utils/state-loaders";
 
 export default function Article() {
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
@@ -27,21 +23,7 @@ export default function Article() {
   const [isTopicsError, setIsTopicsError] = useState(false);
 
   useEffect(() => {
-    setIsTopicsLoading(true);
-    setIsTopicsError(false);
-    getTopics()
-      .then((topicsList) => {
-        const topicsLookup = {};
-        topicsList.forEach(({ slug, description }) => {
-          topicsLookup[slug] = description;
-        });
-        setTopics(topicsLookup);
-        setIsTopicsLoading(false);
-      })
-      .catch((err) => {
-        setTopics({});
-        setIsTopicsError(true);
-      });
+    loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
   }, []);
 
   useEffect(() => {
