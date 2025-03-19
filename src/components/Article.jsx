@@ -124,7 +124,7 @@ export default function Article() {
             {user.username === article.author && (
               <button
                 onClick={handleDeleteArticle}
-                className=""
+                className="article__delete-button"
                 disabled={isDeleting}
               >
                 Delete article
