@@ -123,7 +123,7 @@ export default function ArticleComposer() {
             {isShowErrorTitle && (
               <ErrorComponent
                 message="Title must be between 1 and 64 characters."
-                isHeadinghidden={true}
+                isHeadingHidden={true}
               />
             )}
           </div>
@@ -141,7 +141,7 @@ export default function ArticleComposer() {
             {isShowErrorBody && (
               <ErrorComponent
                 message="The article text must be at least 1 character long."
-                isHeadinghidden={true}
+                isHeadingHidden={true}
               />
             )}
           </div>
@@ -160,7 +160,7 @@ export default function ArticleComposer() {
             {isShowErrorImageURL && (
               <ErrorComponent
                 message="The URL must be a valid PNG or JPEG file."
-                isHeadinghidden={true}
+                isHeadingHidden={true}
               />
             )}
           </div>
@@ -168,7 +168,10 @@ export default function ArticleComposer() {
             {isTopicsLoading ? (
               <p>Loading topics...</p>
             ) : isTopicsError ? (
-              <ErrorComponent message="Sorry, we're having problems. Check your internet connection and try again." isHeadingHidden={true} />
+              <ErrorComponent
+                message="Sorry, we're having problems. Check your internet connection and try again."
+                isHeadingHidden={true}
+              />
             ) : (
               <label>
                 <select
