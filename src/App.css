@@ -34,6 +34,15 @@ a:visited {
   display: none;
 }
 
+.header__image {
+  max-width: 100px;
+  height: 100%;
+}
+
+.header__title {
+  margin: 10px;
+}
+
 .header__report-button {
   float: right;
   height: 2.5em;
