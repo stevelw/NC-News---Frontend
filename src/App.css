@@ -162,6 +162,19 @@ a:visited {
   text-align: right;
 }
 
+.article__delete-button {
+  float: right;
+  height: 2.5em;
+  background-color: #af3800;
+  color: #f8f9f9;
+  border: none;
+  margin: 5px;
+}
+
+.article__delete-button:hover {
+  background-color: #6c91bf;
+}
+
 /* Article list */
 
 .article-list {
