@@ -2,13 +2,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 import HeaderElement from "./HeaderElement";
 import { getArticle, getComments, incrementArticleVotes } from "../utils/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 import ErrorComponent from "./ErrorComponent";
 import Vote from "./Vote";
 import CommentComposer from "./CommentComposer";
 import { loadTopicsState } from "../utils/state-loaders";
+import { deleteArticle } from "../utils/api";
 
 export default function Article() {
+  const { user } = useContext(UserContext);
   const articleId = useParams().articleUrl.match(/(?<=-)[^-]+$/);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState("");
@@ -21,6 +24,7 @@ export default function Article() {
   const [topics, setTopics] = useState({});
   const [isTopicsLoading, setIsTopicsLoading] = useState(true);
   const [isTopicsError, setIsTopicsError] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     loadTopicsState(setTopics, setIsTopicsLoading, setIsTopicsError);
@@ -58,6 +62,18 @@ export default function Article() {
       });
   }, [isCommentReloading]);
 
+  function handleDeleteArticle() {
+    setIsDeleting(true);
+    deleteArticle(articleId)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        err.status === 404 ? setIsError("404") : setIsError("unhandled");
+        setIsDeleting(false);
+      });
+  }
+
   return (
     <>
       <div className="header header--small-screen-hidden">
@@ -73,7 +89,7 @@ export default function Article() {
               message={
                 isError === "404"
                   ? "Sorry, that article doesn't exist."
-                  : "Error loading article. Check your network connection and try again"
+                  : "Sorry, that didn't work. Check your network connection and try again."
               }
             />
           </div>
@@ -105,6 +121,15 @@ export default function Article() {
               }
               alt=""
             />
+            {user.username === article.author && (
+              <button
+                onClick={handleDeleteArticle}
+                className="article__delete-button"
+                disabled={isDeleting}
+              >
+                Delete article
+              </button>
+            )}
             <p className="article__body">{article.body}</p>
             <p className="article__author">{article.author}</p>
             <Vote
